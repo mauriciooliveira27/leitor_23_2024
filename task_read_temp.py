@@ -112,6 +112,7 @@ while(enable_read_loop):
                     record_sensor.data_hora = dt.now()
                     record_sensor.tag = key_sensor
                     record_sensor.tipo = 1
+                    print(result)
                     record_sensor.valor = result
                     conn.insert_record_sensor(record_sensor)
             #form record
