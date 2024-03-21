@@ -229,7 +229,7 @@ class Connector:
         
         try:
             self.connect()
-            cur = self.conn.cursor()
+            cur = self.conn.cursor(dictionary=True)
             cur.execute('select * from placa_secundaria;')
             result = cur.fetchall()
             return result
