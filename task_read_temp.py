@@ -60,7 +60,7 @@ while(enable_read_loop):
     if(read_temp):
       
 
-        data = conn.select_placa_secun()
+        data = conn.select_placa_main()
 
         resultado_agrupado = {}
         # Agrupando os dados pelo canal_placa
