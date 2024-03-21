@@ -93,14 +93,13 @@ while(enable_read_loop):
             for c in canal:
            
                 for s in sensores_list:
-                    chave           =       'Ch' + str(c) + 'S' + str(s)
                  
                     c_int           =       int(c)
                     s_int           =       int(s)
                     mp.set_canal(c_int)
                     mp.set_sensor(s_int)
                     value_sensor = leitor.read_temp()
-                    result[chave]   =       f'{value_sensor:.2f}'
+                    result = {chave: f'Valor_{value_sensor}' for chave in chave_cordoes}
 
                     #record sensor
                     record_sensor.created_at = dt.now()
