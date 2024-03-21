@@ -10,20 +10,8 @@ from model import registro_instalacao
 import json
 import requests
 
-import board
-import digitalio
-import adafruit_max31856
 
-from time import sleep
-# Create sensor object, communicating over the board's default SPI bus
-spi = board.SPI()
 
-# allocate a CS pin and set the direction
-cs = digitalio.DigitalInOut(board.PA7)
-cs.direction = digitalio.Direction.OUTPUT
-
-# create a thermocouple object with the above
-thermocouple = adafruit_max31856.MAX31856(spi, cs)
 
 #Hardware
 from leitor_termo import Leitor_temp
@@ -102,13 +90,13 @@ while(enable_read_loop):
            
                 for s in sensores_list:
                     chave           =       'Ch' + str(c) + 'S' + str(s)
-                    mp              =       Multiplex3()
+                 
                     c_int           =       int(c)
                     s_int           =       int(s)
                     mp.set_canal(c_int)
                     mp.set_sensor(s_int)
-                    valor           =       thermocouple.temperature
-                    result[chave]   =       f'{valor:.2f}'
+                    value_sensor = leitor.read_temp()
+                    result[chave]   =       f'{value_sensor:.2f}'
 
 
                     #one_register = {key:value}
