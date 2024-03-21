@@ -100,15 +100,15 @@ while(enable_read_loop):
                     
         
                     #record sensor
-            print(chave_cordoes)
-            print(leituras)
+           
             record_sensor.created_at = dt.now()
             record_sensor.data_hora = dt.now()
             record_sensor.tag = key_sensor
             record_sensor.tipo = 1
             record_sensor.valor = value_sensor
             conn.insert_record_sensor(record_sensor)
-            
+    print(chave_cordoes)
+    print(leituras)
     #form record
     #record = Registro(conf, datetime.now().strftime("%d/%m/%Y"),str(datetime.time(datetime.now())), json.dumps(data_temp))
     #conn.insert_record(record)
