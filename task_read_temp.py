@@ -100,7 +100,7 @@ while(enable_read_loop):
                     
         
                     #record sensor
-           
+
             record_sensor.created_at = dt.now()
             record_sensor.data_hora = dt.now()
             record_sensor.tag = key_sensor
@@ -109,10 +109,12 @@ while(enable_read_loop):
             conn.insert_record_sensor(record_sensor)
     print(chave_cordoes)
     print(leituras)
+    resultado = dict(zip(chave_cordoes, leituras))
+
     #form record
     #record = Registro(conf, datetime.now().strftime("%d/%m/%Y"),str(datetime.time(datetime.now())), json.dumps(data_temp))
     #conn.insert_record(record)
-    registro_instal.registros_temperaturas = json.dumps(result)
+    registro_instal.registros_temperaturas = json.dumps(resultado)
     registro_instal.data = dt.now()
     conn.insert_registro_instalacao(registro_instal)
     read_temp = False
