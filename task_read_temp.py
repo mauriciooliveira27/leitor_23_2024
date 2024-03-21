@@ -98,6 +98,7 @@ while(enable_read_loop):
                     mp.set_canal(c_int)
                     mp.set_sensor(s_int)
                     value_sensor = leitor.read_temp()
+                    print(value_sensor)
                     result[chave]   =       f'{value_sensor:.2f}'
 
 
