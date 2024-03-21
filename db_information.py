@@ -5,5 +5,5 @@ class db_information:
         self.get_data_base_information
 
     def get_data_base_information(self):
-        db_i = Db_information("Termometria",3306,"localhost","leitor_termo","termometria")
+        db_i = Db_information("Termometria",3306,"192.168.15.30","leitor_termo","termometria")
         return db_i

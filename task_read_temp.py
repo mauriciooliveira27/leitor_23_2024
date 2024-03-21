@@ -57,7 +57,6 @@ while(enable_read_loop):
         read_temp = True
 
     if(read_temp):
-
       
 
 
