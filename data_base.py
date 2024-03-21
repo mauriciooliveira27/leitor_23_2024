@@ -225,12 +225,12 @@ class Connector:
         return status_receita
 
 
-    def select_placa_secun(self):
+    def select_placa_main(self):
         
         try:
             self.connect()
             cur = self.conn.cursor(dictionary=True)
-            cur.execute('select * from placa_secundaria;')
+            cur.execute('select * from placa_secundaria where cod_placa = 0')
             result = cur.fetchall()
             return result
         except mariadb.Error as e:
