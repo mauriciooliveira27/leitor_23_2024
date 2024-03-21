@@ -117,7 +117,7 @@ while(enable_read_loop):
             #form record
             #record = Registro(conf, datetime.now().strftime("%d/%m/%Y"),str(datetime.time(datetime.now())), json.dumps(data_temp))
             #conn.insert_record(record)
-            registro_instal.registros_temperaturas = json.dumps(data_temp)
+            registro_instal.registros_temperaturas = json.dumps(result)
             registro_instal.data = dt.now()
             conn.insert_registro_instalacao(registro_instal)
             read_temp = False
