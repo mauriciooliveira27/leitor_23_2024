@@ -59,6 +59,7 @@ while(enable_read_loop):
     if(read_temp):
 
         data = conn.select_estacao_mt()
+        print(data)
 
 
         data_temp.clear()
