@@ -37,3 +37,5 @@ if response.status_code == 200:
     print('Conteúdo da resposta:', response_content)
 else:
     print('Ocorreu um erro ao fazer a solicitação POST:', response.text)
+
+

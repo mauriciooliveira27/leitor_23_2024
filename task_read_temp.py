@@ -81,9 +81,10 @@ while(enable_read_loop):
         data_temp.clear()
         result  =   {}
         print(lista_final)
+
         for canal in lista_final:
             canals           =       canal.keys()
-            sensores        =       list(canals.values())
+            sensores        =       list(canal.values())
             sensores_list   =       sensores[0]
       
                 #Set hardware channel and sensor
