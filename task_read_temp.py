@@ -114,7 +114,7 @@ while(enable_read_loop):
                     record_sensor.tag = key_sensor
                     record_sensor.tipo = 1
                     print(result)
-                    record_sensor.valor = result
+                    record_sensor.valor = json.dumps(result)
                     conn.insert_record_sensor(record_sensor)
             #form record
             #record = Registro(conf, datetime.now().strftime("%d/%m/%Y"),str(datetime.time(datetime.now())), json.dumps(data_temp))
