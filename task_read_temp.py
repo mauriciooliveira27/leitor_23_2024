@@ -13,7 +13,7 @@ import requests
 import board
 import digitalio
 import adafruit_max31856
-from .multiplex import Multiplex3
+
 from time import sleep
 # Create sensor object, communicating over the board's default SPI bus
 spi = board.SPI()
