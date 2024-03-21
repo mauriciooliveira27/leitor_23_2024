@@ -230,7 +230,7 @@ class Connector:
         try:
             self.connect()
             cur = self.conn.cursor(dictionary=True)
-            cur.execute('select * from placa_secundaria where cod_placa = 0')
+            cur.execute('select * from registro_cordoes where cod_placa = 0')
             result = cur.fetchall()
             return result
         except mariadb.Error as e:
