@@ -75,11 +75,8 @@ while(enable_read_loop):
             else:
                 resultado_agrupado[canal].append(id_sensor)
         # Convertendo o dicionário para a lista desejada
-                
 
         lista_final = [{canal: sensores} for canal, sensores in resultado_agrupado.items()]
-
-
         data_temp.clear()
         result  =   {}
         print(lista_final)
@@ -100,8 +97,8 @@ while(enable_read_loop):
                     mp.set_sensor(s_int)
                     value_sensor = leitor.read_temp()
                     print(value_sensor)
-                    for chave in chave_cordoes:
-                        result[chave] = value_sensor
+                    
+                    result[chave_cordoes] = value_sensor
 
                     #record sensor
             record_sensor.created_at = dt.now()
