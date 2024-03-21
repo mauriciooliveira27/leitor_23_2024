@@ -69,7 +69,7 @@ while(enable_read_loop):
             canal = item['canal_placa']
             id_sensor = item['sensor_placa']
             chave_cordoes = item['cordao_fisico']
-            
+            print(chave_cordoes)
             if canal not in resultado_agrupado:
                 resultado_agrupado[canal] = [id_sensor]
             else:
