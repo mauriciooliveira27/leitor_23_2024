@@ -69,7 +69,6 @@ while(enable_read_loop):
             canal = item['canal_placa']
             id_sensor = item['sensor_placa']
             chave_cordoes.append(item['cordao_fisico'])
-            print(chave_cordoes)
             if canal not in resultado_agrupado:
                 resultado_agrupado[canal] = [id_sensor]
             else:
@@ -78,8 +77,8 @@ while(enable_read_loop):
 
         lista_final = [{canal: sensores} for canal, sensores in resultado_agrupado.items()]
         data_temp.clear()
+        leituras = []
         result  =   {}
-        print(lista_final)
 
         for canal in lista_final:
             canals           =       canal.keys()
@@ -96,16 +95,17 @@ while(enable_read_loop):
                     mp.set_canal(c_int)
                     mp.set_sensor(s_int)
                     value_sensor = leitor.read_temp()
-                    print(value_sensor)
+                    leituras.append(value_sensor)
                     
-                    result[chave_cordoes] = value_sensor
-
+                    
+        
                     #record sensor
+            print(chave_cordoes)
+            print(leituras)
             record_sensor.created_at = dt.now()
             record_sensor.data_hora = dt.now()
             record_sensor.tag = key_sensor
             record_sensor.tipo = 1
-            print(result)
             record_sensor.valor = value_sensor
             conn.insert_record_sensor(record_sensor)
             print(chave_cordoes)
