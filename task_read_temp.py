@@ -98,15 +98,7 @@ while(enable_read_loop):
                     mp.set_canal(c_int)
                     mp.set_sensor(s_int)
                     value_sensor = leitor.read_temp()
-                    print(value_sensor)
                     result[chave]   =       f'{value_sensor:.2f}'
-
-
-                    #one_register = {key:value}
-                    #data_temp.update(one_register)
-                    if key not in data_temp.keys():
-                        data_temp[key] = value
-                    #print(data_temp)
 
                     #record sensor
                     record_sensor.created_at = dt.now()
@@ -114,7 +106,7 @@ while(enable_read_loop):
                     record_sensor.tag = key_sensor
                     record_sensor.tipo = 1
                     print(result)
-                    record_sensor.valor = json.dumps(result)
+                    record_sensor.valor = value_sensor
                     conn.insert_record_sensor(record_sensor)
             #form record
             #record = Registro(conf, datetime.now().strftime("%d/%m/%Y"),str(datetime.time(datetime.now())), json.dumps(data_temp))
