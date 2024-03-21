@@ -64,11 +64,11 @@ while(enable_read_loop):
 
         resultado_agrupado = {}
         # Agrupando os dados pelo canal_placa
-
+        chave_cordoes = []
         for item in data:
             canal = item['canal_placa']
             id_sensor = item['sensor_placa']
-            chave_cordoes = item['cordao_fisico']
+            chave_cordoes.append(item['cordao_fisico'])
             print(chave_cordoes)
             if canal not in resultado_agrupado:
                 resultado_agrupado[canal] = [id_sensor]
@@ -110,6 +110,7 @@ while(enable_read_loop):
                     print(result)
                     record_sensor.valor = value_sensor
                     conn.insert_record_sensor(record_sensor)
+                    print(chave_cordoes)
             #form record
             #record = Registro(conf, datetime.now().strftime("%d/%m/%Y"),str(datetime.time(datetime.now())), json.dumps(data_temp))
             #conn.insert_record(record)
