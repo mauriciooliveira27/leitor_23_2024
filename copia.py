@@ -10,9 +10,6 @@ from model import registro_instalacao
 import json
 import requests
 
-
-
-
 #Hardware
 from leitor_termo import Leitor_temp
 from multiplex import Multiplex3

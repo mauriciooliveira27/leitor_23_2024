@@ -25,9 +25,9 @@ class App:
 
         def exe_read_temp(self):
 
-            data = self.conn.select_placa_main()
-            resultado_agrupado = {}
-            chave_cordoes = []
+            data                    =       self.conn.select_placa_main()
+            resultado_agrupado      =       {}
+            chave_cordoes           =       []
 
             for item in data:
                 canal       =       item['canal_placa']
@@ -59,7 +59,7 @@ class App:
                         self.mp.set_canal(c_int)
                         self.mp.set_sensor(s_int)
                         value_sensor    =       self.leitor.read_temp()
-                        leituras.append(value_sensor)
+                        leituras.append(f'{value_sensor:.2f}')
 
               
             print(chave_cordoes)
