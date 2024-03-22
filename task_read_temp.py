@@ -94,7 +94,7 @@ class App:
         lista_final = [{canal:sensores} for canal , sensores in resultado_agrupado.items()]
         leituras = []
 
-        url = 'http://192.168.15.41/api/teste/'
+        url = 'http://192.168.15.51/api/teste/'
         response = requests.post(url, json=lista_final)
 
         if response.status_code == 200:
