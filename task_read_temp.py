@@ -23,7 +23,7 @@ class App:
             self.registro_instal    =       registro_instalacao(0, self.conf.nome, self.conf.configuracao_fisica, self.dt.now(), "")
 
 
-        def read_temp(self):
+        def exe_read_temp(self):
 
             data = self.conn.select_placa_main()
             resultado_agrupado = {}
@@ -78,4 +78,4 @@ if __name__ == '__main__':
 
     app = App()
 
-    app.read_temp()
+    app.exe_read_temp()
