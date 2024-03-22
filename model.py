@@ -1,5 +1,4 @@
-class 
-Config_install:
+class Config_install:
 
     def __init__(self,nome,tipo,dados,configuracao_fisica, ip):
         self.nome = nome
