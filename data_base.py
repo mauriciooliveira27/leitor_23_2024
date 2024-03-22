@@ -235,3 +235,15 @@ class Connector:
             return result
         except mariadb.Error as e:
             print(e)
+
+    
+    def select_placa_secun(self):
+        try:
+            self.connect()
+            cur = self.conn.cursor(dictionary=True)
+            cur.execute('select * from registro_cordoes where cod_placa = 1')
+            result = cur.fetchall()
+            return result
+        
+        except mariadb.Error as e:
+            print(e)

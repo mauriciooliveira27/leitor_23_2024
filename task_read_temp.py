@@ -7,71 +7,101 @@ import time
 from datetime import date
 from datetime import datetime
 from model import registro_instalacao
-
+import requests
 
 class App:
         
-        def __init__(self) -> None:
-            self.db                 =       Db_information("Termometria",3306,"localhost","leitor_termo","termometria")
-            self.conn               =       data_base.Connector(self.db)
-            self.conf               =       self.conn.get_informaton_instal()
-            self.data_instal        =       json.loads(self.conf.dados)
-            self.leitor             =       Leitor_temp()
-            self.mp                 =       Multiplex3()
-            self.dt                 =       datetime
-            self.read_temp          =       True
-            self.registro_instal    =       registro_instalacao(0, self.conf.nome, self.conf.configuracao_fisica, self.dt.now(), "")
+    def __init__(self) -> None:
+        self.db                 =       Db_information("Termometria",3306,"localhost","leitor_termo","termometria")
+        self.conn               =       data_base.Connector(self.db)
+        self.conf               =       self.conn.get_informaton_instal()
+        self.data_instal        =       json.loads(self.conf.dados)
+        self.leitor             =       Leitor_temp()
+        self.mp                 =       Multiplex3()
+        self.dt                 =       datetime
+        self.read_temp          =       True
+        self.registro_instal    =       registro_instalacao(0, self.conf.nome, self.conf.configuracao_fisica, self.dt.now(), "")
 
 
-        def exe_read_temp(self):
+    def exe_read_temp(self):
 
-            data                    =       self.conn.select_placa_main()
-            resultado_agrupado      =       {}
-            chave_cordoes           =       []
+        data_placa                    =       self.conn.select_placa_main()
+        resultado_agrupado      =       {}
+        chave_cordoes           =       []
 
-            for item in data:
-                canal       =       item['canal_placa']
-                id_sensor   =       item['sensor_placa']
-                chave_cordoes.append(item['cordao_fisico'])
+        for item in data_placa:
 
-                if canal not in resultado_agrupado:
-                    resultado_agrupado[canal] = [id_sensor]
-                else:
-                    resultado_agrupado[canal].append(id_sensor)
+            canal               =       item['canal_placa']
+            id_sensor           =       item['sensor_placa']
+            chave_cordoes.append(item['cordao_fisico'])
 
-            # Convertendo o dicionário para a lista desejada
-            lista_final     =       [{canal: sensores} for canal, sensores in resultado_agrupado.items()]
-            leituras        =       []
- 
+            if canal not in resultado_agrupado:
+                resultado_agrupado[canal] = [id_sensor]
+            else:
+                resultado_agrupado[canal].append(id_sensor)
 
-            for canal in lista_final:
-                canals              =       canal.keys()
-                sensores            =       list(canal.values())
-                sensores_list       =       sensores[0]
+        # Convertendo o dicionário para a lista desejada
+        lista_final     =       [{canal: sensores} for canal, sensores in resultado_agrupado.items()]
+        leituras        =       []
+
+
+        for canal in lista_final:
+            canals              =       canal.keys()
+            sensores            =       list(canal.values())
+            sensores_list       =       sensores[0]
+    
+            #Set hardware channel and sensor
+            for c in canal:
         
-                #Set hardware channel and sensor
-                for c in canal:
+                for s in sensores_list:
+                
+                    c_int           =       int(c)
+                    s_int           =       int(s)
+                    self.mp.set_canal(c_int)
+                    self.mp.set_sensor(s_int)
+                    value_sensor    =       self.leitor.read_temp()
+                    leituras.append(f'{value_sensor:.2f}')
+
             
-                    for s in sensores_list:
-                    
-                        c_int           =       int(c)
-                        s_int           =       int(s)
-                        self.mp.set_canal(c_int)
-                        self.mp.set_sensor(s_int)
-                        value_sensor    =       self.leitor.read_temp()
-                        leituras.append(f'{value_sensor:.2f}')
+        print(chave_cordoes)
+        print(leituras)
+        resultado = dict(zip(chave_cordoes, leituras))
+        #form record
+        #record = Registro(conf, datetime.now().strftime("%d/%m/%Y"),str(datetime.time(datetime.now())), json.dumps(data_temp))
+        #conn.insert_record(record)
+        self.registro_instal.registros_temperaturas = json.dumps(resultado)
+        self.registro_instal.data = self.dt.now()
+        self.conn.insert_registro_instalacao(self.registro_instal)
 
-              
-            print(chave_cordoes)
-            print(leituras)
-            resultado = dict(zip(chave_cordoes, leituras))
-            #form record
-            #record = Registro(conf, datetime.now().strftime("%d/%m/%Y"),str(datetime.time(datetime.now())), json.dumps(data_temp))
-            #conn.insert_record(record)
-            self.registro_instal.registros_temperaturas = json.dumps(resultado)
-            self.registro_instal.data = self.dt.now()
-            self.conn.insert_registro_instalacao(self.registro_instal)
 
+    def read_temp_placa_secun(self):
+
+        data_placa = self.conn.select_placa_secun()
+        resultado_agrupado = {}
+        chave_cordoes = []
+
+        for item in data_placa:
+            canal   =   item['canal_placa']
+            id_sensor = item['sensor_placa']
+            chave_cordoes.append(item['cordao_fisico'])
+
+            if canal not in resultado_agrupado:
+                resultado_agrupado[canal] = [id_sensor]
+            else:
+                resultado_agrupado[canal].append(id_sensor)
+
+
+        lista_final = [{canal:sensores} for canal , sensores in resultado_agrupado.items()]
+        leituras = []
+
+        url = 'http://192.168.15.41/api/teste/'
+        response = requests.post(url, json=lista_final)
+
+        if response.status_code == 200:
+            response_content = response.text
+            print('Conteúdo da resposta:', response_content)
+        else:
+            print('Ocorreu um erro ao fazer a solicitação POST:', response.text)
 
 
 if __name__ == '__main__':
@@ -79,3 +109,4 @@ if __name__ == '__main__':
     app = App()
 
     app.exe_read_temp()
+    app.read_temp_placa_secun()
