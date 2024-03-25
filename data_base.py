@@ -230,20 +230,31 @@ class Connector:
         try:
             self.connect()
             cur = self.conn.cursor(dictionary=True)
-            cur.execute('select * from registro_cordoes where cod_placa = 0')
+            cur.execute(f'select * from registro_cordoes where cod_placa = 0')
+            result = cur.fetchall()
+            return result
+        except mariadb.Error as e:
+            print(e)
+
+    def select_placa_secund(self):
+        try:
+            self.connect()
+            cur = self.conn.cursor(dictionary = True)
+            cur.execute(f'select * from registro_placas where cod_placa != 0')
+            result = cur.fetchall()
+            return result
+        except mariadb.Error as e:
+            print(e)
+    
+    def select_data_placa_secun(self, cod_placa):
+        try:
+            self.connect()
+            cur = self.conn.cursor(dictionary=True)
+            cur.execute(f'select * from registro_cordoes where cod_placa = {cod_placa}')
             result = cur.fetchall()
             return result
         except mariadb.Error as e:
             print(e)
 
     
-    def select_placa_secun(self):
-        try:
-            self.connect()
-            cur = self.conn.cursor(dictionary=True)
-            cur.execute('select * from registro_cordoes where cod_placa = 1')
-            result = cur.fetchall()
-            return result
-        
-        except mariadb.Error as e:
-            print(e)
+   

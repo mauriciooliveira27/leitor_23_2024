@@ -25,9 +25,9 @@ class App:
 
     def exe_read_temp(self):
 
-        data_placa                    =       self.conn.select_placa_main()
-        resultado_agrupado      =       {}
-        chave_cordoes           =       []
+        data_placa                      =       self.conn.select_placa_main()
+        resultado_agrupado              =       {}
+        chave_cordoes                   =       []
 
         for item in data_placa:
 
@@ -65,24 +65,21 @@ class App:
             
         print(chave_cordoes)
         print(leituras)
-        resultado = dict(zip(chave_cordoes, leituras))
-        #form record
-        #record = Registro(conf, datetime.now().strftime("%d/%m/%Y"),str(datetime.time(datetime.now())), json.dumps(data_temp))
-        #conn.insert_record(record)
-        self.registro_instal.registros_temperaturas = json.dumps(resultado)
-        self.registro_instal.data = self.dt.now()
+        resultado                                       =   dict(zip(chave_cordoes, leituras))
+        self.registro_instal.registros_temperaturas     =   json.dumps(resultado)
+        self.registro_instal.data                       =   self.dt.now()
         self.conn.insert_registro_instalacao(self.registro_instal)
 
 
     def read_temp_placa_secun(self):
 
-        data_placa = self.conn.select_placa_secun()
-        resultado_agrupado = {}
-        chave_cordoes = []
+        data_placa = self.conn.select_data_placa_secun()
+        resultado_agrupado      =   {}
+        chave_cordoes           =   []
 
         for item in data_placa:
-            canal   =   item['canal_placa']
-            id_sensor = item['sensor_placa']
+            canal           =   item['canal_placa']
+            id_sensor       =   item['sensor_placa']
             chave_cordoes.append(item['cordao_fisico'])
 
             if canal not in resultado_agrupado:
@@ -91,8 +88,8 @@ class App:
                 resultado_agrupado[canal].append(id_sensor)
 
 
-        lista_final = [{canal:sensores} for canal , sensores in resultado_agrupado.items()]
-        leituras = []
+        lista_final     =   [{canal:sensores} for canal , sensores in resultado_agrupado.items()]
+        leituras        =   []
 
         url = 'http://192.168.15.51/api/teste/'
         response = requests.post(url, json=lista_final)
@@ -107,6 +104,5 @@ class App:
 if __name__ == '__main__':
 
     app = App()
-
     app.exe_read_temp()
     app.read_temp_placa_secun()
