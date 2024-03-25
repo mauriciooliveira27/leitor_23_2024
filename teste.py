@@ -39,6 +39,7 @@ conn = data_base.Connector(db)
 #     print('Ocorreu um erro ao fazer a solicitação POST:', response.text)
 
 
-result = conn.select_placa_secund()
+result = conn.select_placa_secund() 
+
 
 print(result)
