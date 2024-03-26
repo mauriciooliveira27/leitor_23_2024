@@ -102,6 +102,7 @@ class App:
 
 
             for ip in ip_placa[indice]:
+                print(ip)
                 url = f'http://{ip}/api/get_temp/'
                 response = requests.post(url, json=lista_final)
         
