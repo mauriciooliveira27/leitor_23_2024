@@ -102,17 +102,17 @@ class App:
             lista_final     =   [{canal:sensores} for canal , sensores in resultado_agrupado.items()]#cria lista de dicionario [{1:[1,2,3,4,5]},{2:[1,2,3,4,5]},{3:[1,2,3,4,5]}] a api espera essa estrutura
 
 
-            for ip in ip_placa[indice]:
-                print(ip)
-                url = f'http://{ip}/api/get_temp/'
-                response = requests.post(url, json=lista_final)
-        
-                leituras = response.text
-                leitura_list = json.loads(leituras)
-                response_content = dict(zip(chave_cordoes,leitura_list))
-                data_temp.update(response_content)
+            ip =  ip_placa[indice]
+            print(ip)
+            url = f'http://{ip}/api/get_temp/'
+            response = requests.post(url, json=lista_final)
 
-            return data_temp
+            leituras = response.text
+            leitura_list = json.loads(leituras)
+            response_content = dict(zip(chave_cordoes,leitura_list))
+            data_temp.update(response_content)
+
+        return data_temp
    
 
 

@@ -51,12 +51,12 @@ import json
 
 
 cod = [1,2,3,4]
-ip = ['4','5','6','7']
+ip = ['192.168.15.51','192.168.15.52','192.168.15.53','192.168.15.54']
 
 for indice , c in enumerate(cod):
     
-    for i in ip[indice]:
-        print(f"cod{c} ip {ip}")
+    i = ip[indice]
+    print(f"cod{c} ip {i}")
 
 acumulado = {}
 r1 = {'ch1s1': '20.01'}
