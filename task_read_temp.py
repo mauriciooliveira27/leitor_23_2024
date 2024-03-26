@@ -21,6 +21,8 @@ class App:
         self.dt                 =       datetime
         self.read_temp          =       True
         self.registro_instal    =       registro_instalacao(0, self.conf.nome, self.conf.configuracao_fisica, self.dt.now(), "")
+        self.reult_placa_main = None
+        self.result_placa_secund = None
 
 
     def exe_read_temp(self):
@@ -62,8 +64,8 @@ class App:
                     value_sensor    =       self.leitor.read_temp()
                     leituras.append(f'{value_sensor:.2f}')
 
-        self.resultado      =   dict(zip(chave_cordoes, leituras))
-        return self.resultado
+        resultado      =   dict(zip(chave_cordoes, leituras))
+        self.reult_placa_main =  resultado
 
 
     def get_data_placa(self):
@@ -111,7 +113,7 @@ class App:
             chave_cordoes.clear()
             data_temp.update(response_content)
 
-        return data_temp
+        self.result_placa_secund = data_temp
    
 
 
@@ -131,8 +133,8 @@ def main():
     th1.join()
     th2.join()
 
-    JSON1 = app.exe_read_temp
-    JSON2 = app.read_temp_placa_secun
+    JSON1 = app.reult_placa_main
+    JSON2 = app.result_placa_secund
     JSON_COMPLETE   =   {**JSON1, **JSON2}
     app.save(JSON_COMPLETE)
 
