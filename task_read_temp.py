@@ -118,6 +118,8 @@ class App:
 if __name__ == '__main__':
 
     app = App()
-    print(app.exe_read_temp())
-    print(app.read_temp_placa_secun())
+    JSON1 = app.exe_read_temp()
+    JSON2 = app.read_temp_placa_secun()
+    JSON_COMPLETE = {**JSON1, **JSON2}
+    print(JSON_COMPLETE)
  
