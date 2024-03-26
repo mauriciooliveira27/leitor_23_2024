@@ -62,11 +62,8 @@ class App:
                     value_sensor    =       self.leitor.read_temp()
                     leituras.append(f'{value_sensor:.2f}')
 
-        resultado                                       =   dict(zip(chave_cordoes, leituras))
-        print(resultado)
-        self.registro_instal.registros_temperaturas     =   json.dumps(resultado)
-        self.registro_instal.data                       =   self.dt.now()
-        self.conn.insert_registro_instalacao(self.registro_instal)
+        self.resultado                                       =   dict(zip(chave_cordoes, leituras))
+        return self.resultado
 
 
     def get_cod_placa(self):
@@ -89,33 +86,38 @@ class App:
             data_placa = self.conn.select_data_placa_secun(cod) #pega os dados da placa
        
         
-        for item in data_placa:
-            canal           =   item['canal_placa']#pega canal 
-            id_sensor       =   item['sensor_placa']#pega o sensor
-            chave_cordoes.append(item['cordao_fisico'])#pego nomes dos cordoes fisicos
+            for item in data_placa:
+                canal           =   item['canal_placa']#pega canal 
+                id_sensor       =   item['sensor_placa']#pega o sensor
+                chave_cordoes.append(item['cordao_fisico'])#pego nomes dos cordoes fisicos
 
-            if canal not in resultado_agrupado:
-                resultado_agrupado[canal] = [id_sensor]#cria o dicionario , caso a chave 'canal" ainda não exista , caso contrario ele apenas adiciona o sensor a lista na linha 97
-            else:
-                resultado_agrupado[canal].append(id_sensor)
+                if canal not in resultado_agrupado:
+                    resultado_agrupado[canal] = [id_sensor]#cria o dicionario , caso a chave 'canal" ainda não exista , caso contrario ele apenas adiciona o sensor a lista na linha 97
+                else:
+                    resultado_agrupado[canal].append(id_sensor)
 
-        lista_final     =   [{canal:sensores} for canal , sensores in resultado_agrupado.items()]#cria lista de dicionario [{1:[1,2,3,4,5]},{2:[1,2,3,4,5]},{3:[1,2,3,4,5]}] a api espera essa estrutura
-        for ip in ip_placa:
-            url = f'http://{ip}/api/teste/'
-            response = requests.post(url, json=lista_final)
-     
-        leituras = response.text
-        leitura_list = json.loads(leituras)
-        print(leitura_list.__class__)
-        response_content = dict(zip(chave_cordoes,leitura_list))
-        print(response_content)
+            lista_final     =   [{canal:sensores} for canal , sensores in resultado_agrupado.items()]#cria lista de dicionario [{1:[1,2,3,4,5]},{2:[1,2,3,4,5]},{3:[1,2,3,4,5]}] a api espera essa estrutura
+            for ip in ip_placa:
+                url = f'http://{ip}/api/teste/'
+                response = requests.post(url, json=lista_final)
+        
+            leituras = response.text
+            leitura_list = json.loads(leituras)
+            response_content = dict(zip(chave_cordoes,leitura_list))
+
+            return response_content
    
-     
+
+
+    def save(self):
+        self.registro_instal.registros_temperaturas     =   json.dumps(self.resultado)
+        self.registro_instal.data                       =   self.dt.now()
+        self.conn.insert_registro_instalacao(self.registro_instal)
 
 
 if __name__ == '__main__':
 
     app = App()
-    # app.exe_read_temp()
-    app.read_temp_placa_secun()
+    print(app.exe_read_temp())
+    print(app.read_temp_placa_secun())
  
