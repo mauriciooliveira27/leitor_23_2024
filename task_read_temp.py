@@ -106,6 +106,7 @@ class App:
      
         leituras = [l for l in response.text]
         print(leituras.__class__)
+        print(leituras)
         response_content = dict(zip(chave_cordoes,leituras))
         print(response_content)
    
