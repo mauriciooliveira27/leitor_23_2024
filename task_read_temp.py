@@ -102,7 +102,7 @@ class App:
                 resultado_agrupado[canal].append(id_sensor)
 
         lista_final     =   [{canal:sensores} for canal , sensores in resultado_agrupado.items()]#cria lista de dicionario [{1:[1,2,3,4,5]},{2:[1,2,3,4,5]},{3:[1,2,3,4,5]}] a api espera essa estrutura
-     
+        print(lista_final)
         for ip in ip_placa:
             url = f'http://{ip}/api/teste/'
             response = requests.post(url, json=lista_final)
