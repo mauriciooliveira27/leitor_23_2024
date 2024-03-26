@@ -103,15 +103,15 @@ class App:
 
         lista_final     =   [{canal:sensores} for canal , sensores in resultado_agrupado.items()]#cria lista de dicionario [{1:[1,2,3,4,5]},{2:[1,2,3,4,5]},{3:[1,2,3,4,5]}] a api espera essa estrutura
      
+        for ip in ip_placa:
+            url = f'http://{ip}/api/teste/'
+            response = requests.post(url, json=lista_final)
 
-        url = f'http://{ip_placa}/api/teste/'
-        response = requests.post(url, json=lista_final)
-
-        if response.status_code == 200:
-            response_content = response.text
-            print('Conteúdo da resposta:', response_content)
-        else:
-            print('Ocorreu um erro ao fazer a solicitação POST:', response.text)
+            if response.status_code == 200:
+                response_content = response.text
+                print('Conteúdo da resposta:', response_content)
+            else:
+                print('Ocorreu um erro ao fazer a solicitação POST:', response.text)
 
 
 if __name__ == '__main__':
