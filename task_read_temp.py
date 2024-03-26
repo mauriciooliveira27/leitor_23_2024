@@ -105,9 +105,9 @@ class App:
             response = requests.post(url, json=lista_final)
      
         leituras = response.text
-        leituras_float = [float(valor) for valor in leituras]
-        print(leituras_float)
-        response_content = dict(zip(chave_cordoes,leituras_float))
+        leitura_list = json.loads(leituras)
+        print(leitura_list.__class__)
+        response_content = dict(zip(chave_cordoes,leitura_list))
         print(response_content)
    
      
