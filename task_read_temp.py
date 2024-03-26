@@ -104,15 +104,10 @@ class App:
             url = f'http://{ip}/api/teste/'
             response = requests.post(url, json=lista_final)
 
-        if response.status_code == 200:
-            leituras = response.text
-            print(leituras)
-            print(chave_cordoes)
-            response_content = dict(zip(chave_cordoes,leituras))
-            print(response_content)
-            
-        else:
-            print('Ocorreu um erro ao fazer a solicitação POST:', response.text)
+        leituras = response.text
+        response_content = dict(zip(chave_cordoes,leituras))
+        print(response_content)
+     
 
 
 if __name__ == '__main__':
