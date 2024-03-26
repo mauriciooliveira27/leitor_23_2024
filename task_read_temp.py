@@ -66,7 +66,7 @@ class App:
         return self.resultado
 
 
-    def get_cod_placa(self):
+    def get_data_placa(self):
 
         result          =   self.conn.select_placa_secund() 
         cod_placa       =   [cod['cod_placa'] for cod in result]
@@ -77,12 +77,14 @@ class App:
 
     def read_temp_placa_secun(self):
 
-        cod_placa,ip_placa      =   self.get_cod_placa()
+        cod_placa,ip_placa      =   self.get_data_placa()
+
         resultado_agrupado      =   {}#agrupando em dicionario os canal e sensores EX: {1:[1,2,3,4,5]}
         chave_cordoes           =   []#salvo em lista os nomes dos cordeos fisicos EX: 'Ch1S1'
+        data_placa              =   None
+        data_temp               =   {}
 
-        data_placa = None
-        for cod in cod_placa:
+        for indice, cod in enumerate(cod_placa):
             data_placa = self.conn.select_data_placa_secun(cod) #pega os dados da placa
        
         
@@ -97,15 +99,18 @@ class App:
                     resultado_agrupado[canal].append(id_sensor)
 
             lista_final     =   [{canal:sensores} for canal , sensores in resultado_agrupado.items()]#cria lista de dicionario [{1:[1,2,3,4,5]},{2:[1,2,3,4,5]},{3:[1,2,3,4,5]}] a api espera essa estrutura
-            for ip in ip_placa:
+
+
+            for ip in ip_placa[indice]:
                 url = f'http://{ip}/api/get_temp/'
                 response = requests.post(url, json=lista_final)
         
-            leituras = response.text
-            leitura_list = json.loads(leituras)
-            response_content = dict(zip(chave_cordoes,leitura_list))
+                leituras = response.text
+                leitura_list = json.loads(leituras)
+                response_content = dict(zip(chave_cordoes,leitura_list))
+                data_temp.update(response_content)
 
-            return response_content
+            return data_temp
    
 
 
