@@ -110,6 +110,7 @@ class App:
             leituras = response.text
             leitura_list = json.loads(leituras)
             response_content = dict(zip(chave_cordoes,leitura_list))
+            chave_cordoes.clear()
             data_temp.update(response_content)
 
         return data_temp
