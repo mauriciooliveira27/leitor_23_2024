@@ -104,7 +104,7 @@ class App:
             url = f'http://{ip}/api/teste/'
             response = requests.post(url, json=lista_final)
      
-        leituras = response.text
+        leituras = [l for l in response.text]
         print(leituras.__class__)
         response_content = dict(zip(chave_cordoes,leituras))
    
