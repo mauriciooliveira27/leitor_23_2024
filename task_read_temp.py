@@ -105,7 +105,8 @@ class App:
             response = requests.post(url, json=lista_final)
 
             if response.status_code == 200:
-                response_content = dict(zip(chave_cordoes,response.text))
+                leituras = response.text
+                response_content = dict(zip(chave_cordoes,leituras))
                 print(response_content)
             else:
                 print('Ocorreu um erro ao fazer a solicitação POST:', response.text)
