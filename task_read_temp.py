@@ -109,6 +109,7 @@ class App:
                 print(leituras)
                 print(chave_cordoes)
                 response_content = dict(zip(chave_cordoes,leituras))
+                print(response_content)
                
             else:
                 print('Ocorreu um erro ao fazer a solicitação POST:', response.text)
