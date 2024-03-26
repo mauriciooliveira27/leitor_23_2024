@@ -62,7 +62,7 @@ class App:
                     value_sensor    =       self.leitor.read_temp()
                     leituras.append(f'{value_sensor:.2f}')
 
-        self.resultado                                       =   dict(zip(chave_cordoes, leituras))
+        self.resultado      =   dict(zip(chave_cordoes, leituras))
         return self.resultado
 
 
@@ -98,7 +98,7 @@ class App:
 
             lista_final     =   [{canal:sensores} for canal , sensores in resultado_agrupado.items()]#cria lista de dicionario [{1:[1,2,3,4,5]},{2:[1,2,3,4,5]},{3:[1,2,3,4,5]}] a api espera essa estrutura
             for ip in ip_placa:
-                url = f'http://{ip}/api/teste/'
+                url = f'http://{ip}/api/get_temp/'
                 response = requests.post(url, json=lista_final)
         
             leituras = response.text
