@@ -83,10 +83,14 @@ class App:
     def read_temp_placa_secun(self):
 
         cod_placa,ip_placa      =   self.get_cod_placa()
-        data_placa              =   self.conn.select_data_placa_secun(cod_placa)#pega os dados da placa
         resultado_agrupado      =   {}#agrupando em dicionario os canal e sensores EX: {1:[1,2,3,4,5]}
         chave_cordoes           =   []#salvo em lista os nomes dos cordeos fisicos EX: 'Ch1S1'
 
+        data_placa = None
+        for cod in cod_placa:
+            data_placa = self.conn.select_data_placa_secun(cod) #pega os dados da placa
+       
+        
         for item in data_placa:
             canal           =   item['canal_placa']#pega canal 
             id_sensor       =   item['sensor_placa']#pega o sensor
