@@ -62,10 +62,8 @@ class App:
                     value_sensor    =       self.leitor.read_temp()
                     leituras.append(f'{value_sensor:.2f}')
 
-            
-        print(chave_cordoes)
-        print(leituras)
         resultado                                       =   dict(zip(chave_cordoes, leituras))
+        print(resultado)
         self.registro_instal.registros_temperaturas     =   json.dumps(resultado)
         self.registro_instal.data                       =   self.dt.now()
         self.conn.insert_registro_instalacao(self.registro_instal)
@@ -102,14 +100,13 @@ class App:
                 resultado_agrupado[canal].append(id_sensor)
 
         lista_final     =   [{canal:sensores} for canal , sensores in resultado_agrupado.items()]#cria lista de dicionario [{1:[1,2,3,4,5]},{2:[1,2,3,4,5]},{3:[1,2,3,4,5]}] a api espera essa estrutura
-        print(lista_final)
         for ip in ip_placa:
             url = f'http://{ip}/api/teste/'
             response = requests.post(url, json=lista_final)
 
             if response.status_code == 200:
-                response_content = response.text
-                print('Conteúdo da resposta:', response_content)
+                response_content = dict(zip(chave_cordoes,response.text))
+                print(response_content)
             else:
                 print('Ocorreu um erro ao fazer a solicitação POST:', response.text)
 
@@ -119,3 +116,4 @@ if __name__ == '__main__':
     app = App()
     app.exe_read_temp()
     app.read_temp_placa_secun()
+ 
