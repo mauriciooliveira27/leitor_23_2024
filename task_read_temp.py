@@ -24,7 +24,7 @@ class App:
 
 
     def exe_read_temp(self):
-
+        print('PLACA MAIN')
         data_placa                      =       self.conn.select_placa_main()
         resultado_agrupado              =       {}
         chave_cordoes                   =       []
@@ -76,10 +76,8 @@ class App:
 
 
     def read_temp_placa_secun(self):
-
+        print('PLACA SECUNDARIA')
         cod_placa,ip_placa      =   self.get_data_placa()
-        print(ip_placa)
-
         resultado_agrupado      =   {}#agrupando em dicionario os canal e sensores EX: {1:[1,2,3,4,5]}
         chave_cordoes           =   []#salvo em lista os nomes dos cordeos fisicos EX: 'Ch1S1'
         data_placa              =   None
@@ -122,17 +120,28 @@ class App:
         self.registro_instal.data                       =   self.dt.now()
         self.conn.insert_registro_instalacao(self.registro_instal)
 
+def main():
+    app = App()
+    th1 = threading.Thread(target=app.exe_read_temp)
+    th2 = threading.Thread(target=app.read_temp_placa_secun)
 
-    
+    th1.start()
+    th2.start()
+
+    th1.join()
+    th2.join()
+
+    JSON1 = app.exe_read_temp
+    JSON2 = app.read_temp_placa_secun
+    JSON_COMPLETE   =   {**JSON1, **JSON2}
+    app.save(JSON_COMPLETE)
+
 if __name__ == '__main__':
 
     start_time = time.time()
-    app = App()
-    JSON1           =   app.exe_read_temp()
-    JSON2           =   app.read_temp_placa_secun()
-    JSON_COMPLETE   =   {**JSON1, **JSON2}
-    app.save(JSON_COMPLETE)
-    print(JSON_COMPLETE)
+  
+    
+    main()
     
     end_time = time.time()  # Captura o tempo de término da execução
     execution_time = end_time - start_time
