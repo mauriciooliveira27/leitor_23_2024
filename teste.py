@@ -61,4 +61,4 @@ CHAVE = ['Ch17S1', 'Ch17S2', 'Ch17S3', 'Ch17S4', 'Ch17S5', 'Ch17S6', 'Ch17S7', '
 
 
 RESULTADO  = dict(zip(CHAVE,VALOR))
-print(RESULTADO)
+print(VALOR.__class__)
