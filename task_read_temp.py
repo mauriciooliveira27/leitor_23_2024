@@ -103,8 +103,8 @@ class App:
         for ip in ip_placa:
             url = f'http://{ip}/api/teste/'
             response = requests.post(url, json=lista_final)
-
-        leituras = response.text
+        print(response)
+        leituras = response
         response_content = dict(zip(chave_cordoes,leituras))
         print(response_content)
      
