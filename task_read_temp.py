@@ -78,6 +78,7 @@ class App:
     def read_temp_placa_secun(self):
 
         cod_placa,ip_placa      =   self.get_data_placa()
+        print(ip_placa)
 
         resultado_agrupado      =   {}#agrupando em dicionario os canal e sensores EX: {1:[1,2,3,4,5]}
         chave_cordoes           =   []#salvo em lista os nomes dos cordeos fisicos EX: 'Ch1S1'

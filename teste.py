@@ -56,7 +56,7 @@ ip = ['4','5','6','7']
 for indice , c in enumerate(cod):
     
     for i in ip[indice]:
-        print(f"cod{c} ip {i}")
+        print(f"cod{c} ip {ip}")
 
 acumulado = {}
 r1 = {'ch1s1': '20.01'}
