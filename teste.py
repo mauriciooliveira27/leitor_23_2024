@@ -41,5 +41,5 @@ conn = data_base.Connector(db)
 
 result = conn.select_placa_secund() 
 
-results = [cod for cod in result['cod_placa']]
+results = [cod['cod_placa'] for cod in result]
 print(results)
