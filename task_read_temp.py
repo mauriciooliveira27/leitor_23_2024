@@ -106,6 +106,7 @@ class App:
 
             if response.status_code == 200:
                 leituras = response.text
+                print(leituras)
                 response_content = dict(zip(chave_cordoes,leituras))
                 print(response_content)
             else:
@@ -115,6 +116,6 @@ class App:
 if __name__ == '__main__':
 
     app = App()
-    app.exe_read_temp()
+    # app.exe_read_temp()
     app.read_temp_placa_secun()
  
