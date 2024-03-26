@@ -105,6 +105,7 @@ class App:
             response = requests.post(url, json=lista_final)
      
         leituras = response.text
+        print(leituras)
         print(leituras.__class__)
         response_content = dict(zip(chave_cordoes,leituras))
         print(response_content)
