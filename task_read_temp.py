@@ -8,7 +8,7 @@ from datetime import date
 from datetime import datetime
 from model import registro_instalacao
 import requests
-
+import threading
 class App:
         
     def __init__(self) -> None:
@@ -123,12 +123,17 @@ class App:
         self.conn.insert_registro_instalacao(self.registro_instal)
 
 
+    
 if __name__ == '__main__':
 
+    start_time = time.time()
     app = App()
-    JSON1 = app.exe_read_temp()
-    JSON2 = app.read_temp_placa_secun()
-    JSON_COMPLETE = {**JSON1, **JSON2}
+    JSON1           =   app.exe_read_temp()
+    JSON2           =   app.read_temp_placa_secun()
+    JSON_COMPLETE   =   {**JSON1, **JSON2}
     app.save(JSON_COMPLETE)
     print(JSON_COMPLETE)
- 
+    
+    end_time = time.time()  # Captura o tempo de término da execução
+    execution_time = end_time - start_time
+    print(f"Tempo total de execução: {execution_time:.2f} segundos")
