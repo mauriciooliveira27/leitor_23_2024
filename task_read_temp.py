@@ -109,8 +109,8 @@ class App:
    
 
 
-    def save(self):
-        self.registro_instal.registros_temperaturas     =   json.dumps(self.resultado)
+    def save(self, data):
+        self.registro_instal.registros_temperaturas     =   json.dumps(data)
         self.registro_instal.data                       =   self.dt.now()
         self.conn.insert_registro_instalacao(self.registro_instal)
 
@@ -121,5 +121,6 @@ if __name__ == '__main__':
     JSON1 = app.exe_read_temp()
     JSON2 = app.read_temp_placa_secun()
     JSON_COMPLETE = {**JSON1, **JSON2}
+    app.save(JSON_COMPLETE)
     print(JSON_COMPLETE)
  
