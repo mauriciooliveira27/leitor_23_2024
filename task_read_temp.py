@@ -122,8 +122,14 @@ class App:
                         erro += 1
                         print('dentro do else')
 
+                except requests.exceptions.RequestException as e:
+                    erro += 1
+                    print('Erro de requisição:', e)
+                    print('dentro do except')
+
                 except Exception as e:
                     erro += 1
+                    print('Erro:', e)
                     print('dentro do except')
             
 
