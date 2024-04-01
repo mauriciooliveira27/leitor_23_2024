@@ -9,7 +9,6 @@ from datetime import datetime
 from model import registro_instalacao
 import requests
 import threading
-import schedule
 class App:
         
     def __init__(self) -> None:
@@ -170,9 +169,9 @@ def main():
 
 if __name__ == '__main__':
     
-    schedule.every().hour.do(main)
-
     while True:
-        schedule.run_pending()
-        time.sleep(20)
+        if datetime.now().minute == 0 and datetime.now().second < 5:
+            main()
+        
+        time.sleep(30)
     
