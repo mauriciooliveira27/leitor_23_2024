@@ -123,7 +123,7 @@ class App:
                         print('dentro do else')
 
                 except Exception as e:
-                    
+                    erro += 1
                     print('dentro do except')
             
 
