@@ -133,7 +133,9 @@ class App:
                     print('Erro:', e)
                     print('dentro do except')
                     print(erro)
-            
+
+                if erro == 3:
+                    break
 
         
    
