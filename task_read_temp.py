@@ -134,8 +134,8 @@ class App:
                     print('dentro do except')
                     print(erro)
 
-                if erro == 3:
-                    break
+            if erro == 3:
+                break
 
         
    
