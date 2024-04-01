@@ -108,16 +108,21 @@ class App:
                 leituras            =   response.text
                 status_cod          =   response.status_code
                 print(status_cod)
-                leitura_list        =   json.loads(leituras)
-                response_content    =   dict(zip(chave_cordoes,leitura_list))
-                chave_cordoes.clear()
-                data_temp.update(response_content)
+
+                if status_cod == 200:
+                    leitura_list        =   json.loads(leituras)
+                    response_content    =   dict(zip(chave_cordoes,leitura_list))
+                    chave_cordoes.clear()
+                    data_temp.update(response_content)
+                    self.result_placa_secund = data_temp
+                else:
+                    self.result_placa_secund = None
 
             except Exception as e:
                     ...
             
 
-        self.result_placa_secund = data_temp
+        
    
 
     def save(self, data):
@@ -139,8 +144,15 @@ def main():
 
     JSON1 = app.reult_placa_main
     JSON2 = app.result_placa_secund
-    JSON_COMPLETE   =   {**JSON1, **JSON2}
-    app.save(JSON_COMPLETE)
+
+    if JSON2 != None:
+        JSON_COMPLETE   =   {**JSON1, **JSON2}
+        app.save(JSON_COMPLETE)
+        return
+    elif JSON2 == None:
+        app.save(JSON1)
+        return
+
 
 if __name__ == '__main__':
 
