@@ -117,18 +117,16 @@ class App:
                         data_temp.update(response_content)
                         self.result_placa_secund = data_temp
                         break
-                    else:
-                        self.result_placa_secund = None
-                        erro += 1
-                        print('dentro do else')
 
                 except requests.exceptions.RequestException as e:
+                    time.sleep(30)
                     erro += 1
                     print('Erro de requisição:', e)
                     print('dentro do except')
                     print(erro)
 
                 except Exception as e:
+                    time.sleep(30)
                     erro += 1
                     print('Erro:', e)
                     print('dentro do except')
@@ -170,11 +168,10 @@ def main():
 
 
 if __name__ == '__main__':
-
-    start_time = time.time()
     
-    main()
+    while True:
+        dt = datetime.now()
+        print(dt)
+        if datetime.now().minute == 0 and datetime.now().second < 5:
+            main()
     
-    end_time = time.time()  # Captura o tempo de término da execução
-    execution_time = end_time - start_time
-    print(f"Tempo total de execução: {execution_time:.2f} segundos")
