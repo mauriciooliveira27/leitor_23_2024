@@ -101,25 +101,30 @@ class App:
 
             lista_final         =   [{canal:sensores} for canal , sensores in resultado_agrupado.items()]#cria lista de dicionario [{1:[1,2,3,4,5]},{2:[1,2,3,4,5]},{3:[1,2,3,4,5]}] a api espera essa estrutura
             ip                  =   ip_placa[indice]
+            erro = 0
+            while erro < 3:
+                try:
+                    url                 =   f'http://{ip}/api/get_temp/'
+                    response            =   requests.post(url, json=lista_final)   
+                    leituras            =   response.text
+                    status_cod          =   response.status_code
+                    print(status_cod)
 
-            try:
-                url                 =   f'http://{ip}/api/get_temp/'
-                response            =   requests.post(url, json=lista_final)   
-                leituras            =   response.text
-                status_cod          =   response.status_code
-                print(status_cod)
+                    if status_cod == 200:
+                        leitura_list        =   json.loads(leituras)
+                        response_content    =   dict(zip(chave_cordoes,leitura_list))
+                        chave_cordoes.clear()
+                        data_temp.update(response_content)
+                        self.result_placa_secund = data_temp
+                        break
+                    else:
+                        self.result_placa_secund = None
+                        erro += 1
+                        print('dentro do else')
 
-                if status_cod == 200:
-                    leitura_list        =   json.loads(leituras)
-                    response_content    =   dict(zip(chave_cordoes,leitura_list))
-                    chave_cordoes.clear()
-                    data_temp.update(response_content)
-                    self.result_placa_secund = data_temp
-                else:
-                    self.result_placa_secund = None
-
-            except Exception as e:
-                    ...
+                except Exception as e:
+                    
+                    print('dentro do except')
             
 
         
