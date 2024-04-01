@@ -88,7 +88,6 @@ class App:
 
         for indice, cod in enumerate(cod_placa):
             data_placa = self.conn.select_data_placa_secun(cod) #pega os dados da placa
-       
         
             for item in data_placa:
                 canal           =   item['canal_placa']#pega canal 
@@ -100,18 +99,23 @@ class App:
                 else:
                     resultado_agrupado[canal].append(id_sensor)
 
-            lista_final     =   [{canal:sensores} for canal , sensores in resultado_agrupado.items()]#cria lista de dicionario [{1:[1,2,3,4,5]},{2:[1,2,3,4,5]},{3:[1,2,3,4,5]}] a api espera essa estrutura
-
-
+            lista_final         =   [{canal:sensores} for canal , sensores in resultado_agrupado.items()]#cria lista de dicionario [{1:[1,2,3,4,5]},{2:[1,2,3,4,5]},{3:[1,2,3,4,5]}] a api espera essa estrutura
             ip                  =   ip_placa[indice]
-            url                 =   f'http://{ip}/api/get_temp/'
-            response            =   requests.post(url, json=lista_final)
 
-            leituras            =   response.text
-            leitura_list        =   json.loads(leituras)
-            response_content    =   dict(zip(chave_cordoes,leitura_list))
-            chave_cordoes.clear()
-            data_temp.update(response_content)
+            try:
+                url                 =   f'http://{ip}/api/get_temp/'
+                response            =   requests.post(url, json=lista_final)   
+                leituras            =   response.text
+                status_cod          =   response.status_code
+                print(status_cod)
+                leitura_list        =   json.loads(leituras)
+                response_content    =   dict(zip(chave_cordoes,leitura_list))
+                chave_cordoes.clear()
+                data_temp.update(response_content)
+
+            except Exception as e:
+                    ...
+            
 
         self.result_placa_secund = data_temp
    
