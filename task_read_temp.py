@@ -126,11 +126,13 @@ class App:
                     erro += 1
                     print('Erro de requisição:', e)
                     print('dentro do except')
+                    print(erro)
 
                 except Exception as e:
                     erro += 1
                     print('Erro:', e)
                     print('dentro do except')
+                    print(erro)
             
 
         
