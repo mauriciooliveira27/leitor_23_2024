@@ -62,6 +62,7 @@ class App:
                     self.mp.set_canal(c_int)
                     self.mp.set_sensor(s_int)
                     value_sensor    =       self.leitor.read_temp()
+                    time.sleep(0.3)
                     leituras.append(f'{value_sensor:.2f}')
 
         resultado      =   dict(zip(chave_cordoes, leituras))
@@ -102,25 +103,24 @@ class App:
             lista_final     =   [{canal:sensores} for canal , sensores in resultado_agrupado.items()]#cria lista de dicionario [{1:[1,2,3,4,5]},{2:[1,2,3,4,5]},{3:[1,2,3,4,5]}] a api espera essa estrutura
 
 
-            ip =  ip_placa[indice]
-            print(ip)
-            url = f'http://{ip}/api/get_temp/'
-            response = requests.post(url, json=lista_final)
+            ip                  =   ip_placa[indice]
+            url                 =   f'http://{ip}/api/get_temp/'
+            response            =   requests.post(url, json=lista_final)
 
-            leituras = response.text
-            leitura_list = json.loads(leituras)
-            response_content = dict(zip(chave_cordoes,leitura_list))
+            leituras            =   response.text
+            leitura_list        =   json.loads(leituras)
+            response_content    =   dict(zip(chave_cordoes,leitura_list))
             chave_cordoes.clear()
             data_temp.update(response_content)
 
         self.result_placa_secund = data_temp
    
 
-
     def save(self, data):
         self.registro_instal.registros_temperaturas     =   json.dumps(data)
         self.registro_instal.data                       =   self.dt.now()
         self.conn.insert_registro_instalacao(self.registro_instal)
+
 
 def main():
     app = App()
@@ -141,7 +141,6 @@ def main():
 if __name__ == '__main__':
 
     start_time = time.time()
-  
     
     main()
     
