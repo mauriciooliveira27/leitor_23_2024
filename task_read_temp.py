@@ -139,8 +139,6 @@ class App:
                     self.result_placa_secund = {chave: '' for chave in chave_cordoes }
                     break
 
-        
-   
 
     def save(self, data):
         self.registro_instal.registros_temperaturas     =   json.dumps(data)
@@ -172,4 +170,6 @@ def main():
 
 
 if __name__ == '__main__':
-    main()
+    dt = datetime
+    if dt.now().minute == 0 and dt.now() < 20:
+        main()
