@@ -70,8 +70,9 @@ class App:
 
 
     def get_data_placa(self):
-
-        result          =   self.conn.select_placa_secund() 
+        self.db         =   Db_information("Termometria",3306,"localhost","leitor_termo","termometria")
+        self.conn2      =   data_base.Connector(self.db)
+        result          =   self.conn2.select_placa_secund() 
         cod_placa       =   [cod['cod_placa'] for cod in result]
         ip_placa        =   [ip['ip'] for ip in result]
         return cod_placa  , ip_placa
@@ -148,13 +149,13 @@ class App:
 def main():
     app = App()
     th1 = threading.Thread(target=app.exe_read_temp)
-    # th2 = threading.Thread(target=app.read_temp_placa_secun)
+    th2 = threading.Thread(target=app.read_temp_placa_secun)
 
     th1.start()
-    # th2.start()
+    th2.start()
 
     th1.join()
-    # th2.join()
+    th2.join()
 
     JSON1 = app.reult_placa_main
     JSON2 = app.result_placa_secund
