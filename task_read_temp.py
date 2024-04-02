@@ -23,11 +23,13 @@ class App:
         self.registro_instal        =       registro_instalacao(0, self.conf.nome, self.conf.configuracao_fisica, self.dt.now(), "")
         self.reult_placa_main       =       None
         self.result_placa_secund    =       None
+        self.lock                   =       threading.RLock()
 
 
     def exe_read_temp(self):
         print('PLACA MAIN')
-        data_placa                      =       self.conn.select_placa_main()
+        with self.lock:
+            data_placa                      =       self.conn.select_placa_main()
         resultado_agrupado              =       {}
         chave_cordoes                   =       []
 
@@ -70,9 +72,8 @@ class App:
 
 
     def get_data_placa(self):
-        self.db         =   Db_information("Termometria",3306,"localhost","leitor_termo","termometria")
-        self.conn2      =   data_base.Connector(self.db)
-        result          =   self.conn2.select_placa_secund() 
+       
+        result          =   self.conn.select_placa_secund() 
         cod_placa       =   [cod['cod_placa'] for cod in result]
         ip_placa        =   [ip['ip'] for ip in result]
         return cod_placa  , ip_placa
@@ -81,7 +82,8 @@ class App:
 
     def read_temp_placa_secun(self):
         print('PLACA SECUNDARIA')
-        cod_placa,ip_placa      =   self.get_data_placa()
+        with self.lock:
+            cod_placa,ip_placa      =   self.get_data_placa()
         resultado_agrupado      =   {}#agrupando em dicionario os canal e sensores EX: {1:[1,2,3,4,5]}
         chave_cordoes           =   []#salvo em lista os nomes dos cordeos fisicos EX: 'Ch1S1'
         data_placa              =   None
