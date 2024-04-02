@@ -148,13 +148,13 @@ class App:
 def main():
     app = App()
     th1 = threading.Thread(target=app.exe_read_temp)
-    th2 = threading.Thread(target=app.read_temp_placa_secun)
+    # th2 = threading.Thread(target=app.read_temp_placa_secun)
 
     th1.start()
-    th2.start()
+    # th2.start()
 
     th1.join()
-    th2.join()
+    # th2.join()
 
     JSON1 = app.reult_placa_main
     JSON2 = app.result_placa_secund
