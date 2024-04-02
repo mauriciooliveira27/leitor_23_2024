@@ -170,9 +170,10 @@ def main():
 
 if __name__ == '__main__':
     
-    while True:
-        if datetime.now().minute == 0 and datetime.now().second < 30:
-            main()
+    # while True:
+    #     if datetime.now().minute == 0 and datetime.now().second < 30:
+    #         main()
         
-        time.sleep(2)
+    #     time.sleep(2)
+    main()
     
