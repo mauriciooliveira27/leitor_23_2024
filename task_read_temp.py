@@ -133,6 +133,7 @@ class App:
                     print(erro)
 
                 if erro == 3:
+                    self.result_placa_secund = {chave: '' for chave in chave_cordoes }
                     break
 
         
