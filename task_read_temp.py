@@ -123,9 +123,9 @@ class App:
                         break
 
                     elif status_cod != 200:
-
                         erro += 1
                         print("DENTRO DO ELIF : STATUS_CODE != 200",)
+                        time.sleep(30)
 
                 except requests.exceptions.RequestException as e:
              
@@ -133,6 +133,7 @@ class App:
                     print('Erro de requisição:', e)
                     print('dentro do except')
                     print(erro)
+                    time.sleep(30)
 
                 except Exception as e:
                   
@@ -141,11 +142,9 @@ class App:
                     print('dentro do except')
                     print(erro)
                     print(f"Erro: {type(e).__name__} - {e}")
-
-        
-                   
                     print("Traceback (linha onde ocorreu o erro):")
                     traceback.print_exc()
+                    time.sleep(30)
 
                 if erro == 3:
                     self.result_placa_secund = {chave: '' for chave in chave_cordoes }
