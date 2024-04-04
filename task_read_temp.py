@@ -112,9 +112,7 @@ class App:
                     url                 =   f'http://{ip}/api/get_temp/'
                     response            =   requests.post(url, json=lista_final)   
                     leituras            =   response.text
-                    retorno             =   response.json()['Error']
                     status_cod          =   response.status_code
-                    print(retorno)
 
                     if status_cod == 200:
                         leitura_list        =   json.loads(leituras)
@@ -127,7 +125,7 @@ class App:
                     elif status_cod != 200:
 
                         erro += 1
-                        print("DENTRO DO ELIF : STATUS_CODE != 200", retorno)
+                        print("DENTRO DO ELIF : STATUS_CODE != 200",)
 
                 except requests.exceptions.RequestException as e:
              
