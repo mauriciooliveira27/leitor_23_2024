@@ -9,6 +9,7 @@ from datetime import datetime
 from model import registro_instalacao
 import requests
 import threading
+import traceback
 class App:
         
     def __init__(self) -> None:
@@ -141,6 +142,12 @@ class App:
                     print('Erro:', e)
                     print('dentro do except')
                     print(erro)
+                    print(f"Erro: {type(e).__name__} - {e}")
+
+        
+                   
+                    print("Traceback (linha onde ocorreu o erro):")
+                    traceback.print_exc()
 
                 if erro == 3:
                     self.result_placa_secund = {chave: '' for chave in chave_cordoes }
