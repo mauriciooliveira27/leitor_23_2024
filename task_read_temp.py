@@ -129,14 +129,14 @@ class App:
                         print("DENTRO DO ELIF : STATUS_CODE != 200", retorno)
 
                 except requests.exceptions.RequestException as e:
-                    time.sleep(30)
+             
                     erro += 1
                     print('Erro de requisição:', e)
                     print('dentro do except')
                     print(erro)
 
                 except Exception as e:
-                    time.sleep(30)
+                  
                     erro += 1
                     print('Erro:', e)
                     print('dentro do except')
