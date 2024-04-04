@@ -107,7 +107,7 @@ class App:
             erro = 0
             while erro < 3:
                 try:
-                    url                 =   f'http://{ip}/api/get_temp/'
+                    url                 =   f'http://{ip}:5000/api/get_temp/'
                     response            =   requests.post(url, json=lista_final)   
                     leituras            =   response.text
                     status_cod          =   response.status_code
