@@ -105,6 +105,7 @@ class App:
             lista_final         =   [{canal:sensores} for canal , sensores in resultado_agrupado.items()]#cria lista de dicionario [{1:[1,2,3,4,5]},{2:[1,2,3,4,5]},{3:[1,2,3,4,5]}] a api espera essa estrutura
             ip                  =   ip_placa[indice]
             erro = 0
+            print(ip)
             while erro < 3:
                 try:
                     url                 =   f'http://{ip}/api/get_temp/'
