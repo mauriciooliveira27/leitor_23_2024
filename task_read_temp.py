@@ -110,6 +110,7 @@ class App:
                     url                 =   f'http://{ip}/api/get_temp/'
                     response            =   requests.post(url, json=lista_final)   
                     leituras            =   response.text
+                    retorno             =   response.json()['Error']
                     status_cod          =   response.status_code
                     print(status_cod)
 
@@ -122,8 +123,9 @@ class App:
                         break
 
                     elif status_cod != 200:
+
                         erro += 1
-                        print("DENTRO DO ELIF : STATUS_CODE != 200", leituras)
+                        print("DENTRO DO ELIF : STATUS_CODE != 200", retorno)
 
                 except requests.exceptions.RequestException as e:
                     time.sleep(30)
