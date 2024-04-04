@@ -112,7 +112,7 @@ class App:
                     leituras            =   response.text
                     retorno             =   response.json()['Error']
                     status_cod          =   response.status_code
-                    print(status_cod)
+                    print(retorno)
 
                     if status_cod == 200:
                         leitura_list        =   json.loads(leituras)
