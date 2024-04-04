@@ -121,6 +121,10 @@ class App:
                         self.result_placa_secund = data_temp
                         break
 
+                    elif status_cod != 200:
+                        erro += 1
+                        print("DENTRO DO ELIF : STATUS_CODE != 200")
+
                 except requests.exceptions.RequestException as e:
                     time.sleep(30)
                     erro += 1
