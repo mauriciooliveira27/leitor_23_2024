@@ -123,7 +123,7 @@ class App:
 
                     elif status_cod != 200:
                         erro += 1
-                        print("DENTRO DO ELIF : STATUS_CODE != 200")
+                        print("DENTRO DO ELIF : STATUS_CODE != 200", leituras)
 
                 except requests.exceptions.RequestException as e:
                     time.sleep(30)
