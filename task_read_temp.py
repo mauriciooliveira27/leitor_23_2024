@@ -181,5 +181,7 @@ def main():
 
 
 if __name__ == '__main__':
-   
-    main()
+    
+    dt = datetime
+    if dt.now().minute == 0 and dt.now().second < 5:
+        main()
