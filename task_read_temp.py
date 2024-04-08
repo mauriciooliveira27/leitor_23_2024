@@ -8,11 +8,12 @@ from factory import  FactoryPlacaSlave
 
 class ManagerObjectPlacaSlave(ManagerPlacaSlave):
 
-    _list_placa = []
+    _list_placa = []    
+
 
     def create_object(self):    
-        print(self._ip_placa)
-        print(self._cod_placa)
+        self.cod = self._ip_placa
+        self.ip = self._cod_placa
         for obj in self._cod_placa:
             obj_str = str(obj)
             _factory_placa = FactoryPlacaSlave()
@@ -32,11 +33,11 @@ class ManagerThreads(ManagerObjectPlacaSlave):
     def _init_threds(self):
         self.create_object()
         tasks = []
-        print(self._ip_placa)
-        print(self._cod_placa)
+        print(self.ip)
+        print(self.cod)
 
         for placa in self._list_placa:
-            th = threading.Thread(target=placa.read_temp, args=(self._cod_placa, self._ip_placa))
+            th = threading.Thread(target=placa.read_temp, args=())
 
             tasks.append(th)
 
