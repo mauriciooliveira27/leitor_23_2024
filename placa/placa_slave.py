@@ -41,7 +41,7 @@ class PlacaSlave(PlacaAbstract):
         lista_final         =   [{canal:sensores} for canal , sensores in resultado_agrupado.items()]#cria lista de dicionario [{1:[1,2,3,4,5]},{2:[1,2,3,4,5]},{3:[1,2,3,4,5]}] a api espera essa estrutura
         erro = 0
         print(self.ip_placa)
-        while erro < 3:
+        while erro < 1:
             try:
                 url                 =   f'http://{self.ip_placa}/api/get_temp/'
                 response            =   requests.post(url, json=lista_final)   
