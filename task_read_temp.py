@@ -47,6 +47,10 @@ class ManagerThreads(ManagerObjectPlacaSlave):
 
         [th.join() for th in tasks]
 
+        JSON = [pl for pl in self._list_placa.result_placa_secund]
+        print(JSON)
+
+
 
 class App:
 

@@ -14,7 +14,7 @@ class PlacaSlave(PlacaAbstract):
     def __init__(self, ip_placa, cod_placa) -> None:
         self.ip_placa = ip_placa
         self.cod_placa = cod_placa
-
+        self.result_placa_secund = None
 
     def __str__(self) -> str:
         return self.ip_placa
