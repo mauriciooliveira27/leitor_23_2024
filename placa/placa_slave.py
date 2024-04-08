@@ -67,7 +67,7 @@ class PlacaSlave(PlacaAbstract):
                 print('Erro de requisição:', e)
                 print('dentro do except')
                 print(erro)
-                time.sleep(30)
+                
 
             except Exception as e:
                 
