@@ -2,7 +2,7 @@
 # from model import Db_information
 import requests
 import json
-from placa import PlacaMaster
+# from placa import PlacaMaster
 # db = Db_information("Termometria",3306,"192.168.15.50","scada","termometria")
 # conn = data_base.Connector(db)
 
