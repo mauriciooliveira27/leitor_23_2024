@@ -1,15 +1,7 @@
-import data_base
-from model import Db_information
 import json
-from leitor_termo import Leitor_temp
-from multiplex import Multiplex3
-import time
 from datetime import date
 from datetime import datetime
-from model import registro_instalacao
-import requests
 import threading
-import traceback
 from manager_placa import ManagerPlacaSlave
 from factory import  FactoryPlacaSlave
 
