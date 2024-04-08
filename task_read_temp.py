@@ -19,13 +19,11 @@ class ManagerObjectPlacaSlave(ManagerPlacaSlave):
             placa = _factory_placa.create_placa(name)
             self._list_placa.append(placa)
 
-
-
-
     def save(self, data):
         self.registro_instal.registros_temperaturas     =   json.dumps(data)
         self.registro_instal.data                       =   self.dt.now()
         self.conn.insert_registro_instalacao(self.registro_instal)
+
 
 class ManagerThreads(ManagerObjectPlacaSlave):
 
@@ -33,7 +31,8 @@ class ManagerThreads(ManagerObjectPlacaSlave):
     def _init_threds(self):
         self.create_object()
         tasks = []
-
+        print(self._ip_placa)
+        print(self._cod_placa)
 
         for placa in self._list_placa:
             th = threading.Thread(target=placa.read_temp, args=(self._cod_placa, self._ip_placa))
