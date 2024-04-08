@@ -28,7 +28,6 @@ class ManagerPlacaMaster:
                         data_placa                      =       self.conn.select_placa_main()
                 resultado_agrupado              =       {}
                 
-
                 for item in data_placa:
 
                         self.canal               =       item['canal_placa']
