@@ -30,7 +30,7 @@ class ManagerObjectPlacaSlave(ManagerPlacaSlave):
 class ManagerThreads(ManagerObjectPlacaSlave):
 
 
-    def _init_threds(self):
+    def init_threds(self):
         self.create_object()
         tasks = []
         print(self.ip)
@@ -52,7 +52,7 @@ class App:
     def run(self):
 
         threads = ManagerThreads()
-        threads._init_threds()
+        threads.init_threds()
 
 
 if __name__ == "__main__":
