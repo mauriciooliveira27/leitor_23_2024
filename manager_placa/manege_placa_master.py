@@ -4,6 +4,7 @@ from datetime import datetime
 from model import registro_instalacao
 import threading
 import data_base
+from leitor_termo import Leitor_temp
 
 
 class ManagerPlacaMaster:
@@ -20,6 +21,8 @@ class ManagerPlacaMaster:
                 self.read_temp              =       True
                 self.registro_instal        =       registro_instalacao(0, self.conf.nome, self.conf.configuracao_fisica, self.dt.now(), "")
                 self.lock                   =       threading.RLock()
+                self.leitor                 =       Leitor_temp()
+                self.result_placa_master    =       None
                 self.execute()
         
         def execute(self):

@@ -3,7 +3,7 @@ from .placa_abs import PlacaAbstract
 from .multiplex import Multiplex3
 from typing import Type
 from manager_placa import ManagerPlacaMaster
-from leitor_termo import Leitor_temp
+
 import json
 
 
@@ -12,15 +12,7 @@ class PlacaMaster(PlacaAbstract,ManagerPlacaMaster):
     leituras        =       []
     mp              =       Multiplex3
 
-    def __init__(self) -> None:
-        self.leitor                 =       Leitor_temp()
-        self.result_placa_master    =       None
-        
-
-
     def read_temp(self):
-
-        self.execute()
         for canal in self.lista_CodSen:
             print(canal)
             canals              =       canal.keys()
