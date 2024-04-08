@@ -75,9 +75,9 @@ class App:
 
 if __name__ == "__main__":
     dt = datetime
-    
-    app = App()
-    app.run()
+    if dt.now().minute == 0 and dt.now().second < 5:
+        app = App()
+        app.run()
 
 
 
