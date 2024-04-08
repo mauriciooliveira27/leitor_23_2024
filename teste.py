@@ -80,5 +80,5 @@ import json
 from task_read_temp import ManagerObjectPlacaSlave
 
 teste = ManagerObjectPlacaSlave()
-
+teste.create_object()
 print(teste._list_placa)

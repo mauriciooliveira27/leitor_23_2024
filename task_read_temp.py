@@ -17,7 +17,7 @@ class ManagerObjectPlacaSlave(ManagerPlacaSlave):
             obj_str = str(obj)
             name = 'Placa' + f'{obj_str}'
             placa = self._factory_placa.create_placa(name)
-            print(placa)
+            
             self._list_placa.append(placa)
 
 
