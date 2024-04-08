@@ -27,6 +27,11 @@ class ManagerObjectPlacaSlave(ManagerPlacaSlave):
         self.registro_instal.data                       =   self.dt.now()
         self.conn.insert_registro_instalacao(self.registro_instal)
 
+    
+    @property
+    def get_list(self):
+        return self._list_placa
+
 
 class ManagerThreads(ManagerObjectPlacaSlave):
 
@@ -47,10 +52,13 @@ class ManagerThreads(ManagerObjectPlacaSlave):
 
         [th.join() for th in tasks]
 
-        JSON = [pl for pl in self._list_placa.result_placa_secund]
-        print(JSON)
+    
+        placas = self.get_list
+        json = []
+        for pl in placas:
+            json.append(pl.result_placa_secund)
 
-
+        print(json)
 
 class App:
 
