@@ -4,7 +4,7 @@ from datetime import datetime
 from model import registro_instalacao
 import threading
 import data_base
-from leitor_termo import Leitor_temp
+
 from .base import Base
 
 class ManagerPlacaMaster(Base):

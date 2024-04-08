@@ -5,6 +5,7 @@ import threading
 from model import Db_information
 import data_base
 from abc import ABC, abstractmethod
+from leitor_termo import Leitor_temp
 
 class Base:
 
@@ -19,6 +20,7 @@ class Base:
         self.result_placa_slave         =       None
         self.lock                       =       threading.RLock()
         self.result_placa_master        =       None
+        self.leitor                     =       Leitor_temp()
         self.execute()
 
     
