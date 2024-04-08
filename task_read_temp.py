@@ -48,7 +48,7 @@ class ManagerThreads(ManagerObjectPlacaSlave):
 
         for pl in placas:
 
-            json.update(pl)
+            json.update(pl.result_placa_secund)
 
         print(json)
 
@@ -61,7 +61,6 @@ class App:
 
 
 if __name__ == "__main__":
-
     app = App()
     app.run()
 
