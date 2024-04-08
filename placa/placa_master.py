@@ -1,44 +1,44 @@
 import time
 from .placa_abs import PlacaAbstract
-from multiplex import Multiplex3
+from .multiplex import Multiplex3
 from typing import Type
 from manager_placa import ManagerPlacaMaster
 from leitor_termo import Leitor_temp
 
 
-# class PlacaMaster(PlacaAbstract):
+class PlacaMaster(PlacaAbstract):
 
-#     leituras        =       []
-#     mp              =       Multiplex3
+    leituras        =       []
+    mp              =       Multiplex3
 
-#     def __init__(self) -> None:
-#         self.leitor                 =       Leitor_temp()
-#         self.result_placa_master    =       None
+    def __init__(self) -> None:
+        self.leitor                 =       Leitor_temp()
+        self.result_placa_master    =       None
         
 
 
-#     def read_temp(self, placa : Type[ManagerPlacaMaster]):
+    def read_temp(self, placa : Type[ManagerPlacaMaster]):
 
-#         placa.execute()
-#         for canal in placa.lista_CodSen:
-#             print(canal)
-#             canals              =       canal.keys()
-#             sensores            =       list(canal.values())
-#             sensores_list       =       sensores[0]
+        placa.execute()
+        for canal in placa.lista_CodSen:
+            print(canal)
+            canals              =       canal.keys()
+            sensores            =       list(canal.values())
+            sensores_list       =       sensores[0]
     
-#             #Set hardware channel and sensor
-#             for c in canal:
+            #Set hardware channel and sensor
+            for c in canal:
         
-#                 for s in sensores_list:
+                for s in sensores_list:
                 
-#                     c_int           =       int(c)
-#                     s_int           =       int(s)
-#                     self.mp.set_canal(c_int)
-#                     self.mp.set_sensor(s_int)
-#                     value_sensor    =       self.leitor.read_temp()
-#                     time.sleep(1)
-#                     self.leituras.append(f'{value_sensor:.2f}')
+                    c_int           =       int(c)
+                    s_int           =       int(s)
+                    self.mp.set_canal(c_int)
+                    self.mp.set_sensor(s_int)
+                    value_sensor    =       self.leitor.read_temp()
+                    time.sleep(1)
+                    self.leituras.append(f'{value_sensor:.2f}')
 
-#         resultado               =   dict(zip(placa.chave_cordoes, self.leituras))
-#         self.result_placa_master =   resultado
+        resultado               =   dict(zip(placa.chave_cordoes, self.leituras))
+        self.result_placa_master =   resultado
 
