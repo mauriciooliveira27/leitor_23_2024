@@ -19,7 +19,7 @@ class ManagerObjectPlacaSlave(ManagerPlacaSlave):
             _factory_placa = FactoryPlacaSlave()
             ip = self.ip[indice]
 
-            placa = _factory_placa.create_placa(obj , ip)
+            placa = _factory_placa.create_placa(ip, obj)
             self._list_placa.append(placa)
 
     def save(self, data):
