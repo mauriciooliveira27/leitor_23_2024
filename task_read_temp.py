@@ -40,7 +40,8 @@ class ManagerThreads(ManagerObjectPlacaSlave):
         self.create_object()
         tasks = []
 
-        placa_master = FactoryPlacaMaster()
+        factory_master = FactoryPlacaMaster()
+        placa_master = factory_master.create_placa()
 
         th_master = threading.Thread(target=placa_master.read_temp)
 
@@ -48,7 +49,7 @@ class ManagerThreads(ManagerObjectPlacaSlave):
             th = threading.Thread(target=placa.read_temp)
 
             tasks.append(th)
-            
+
         th_master.start()
         th_master.join()
 
@@ -58,11 +59,14 @@ class ManagerThreads(ManagerObjectPlacaSlave):
 
     
         placas = self.get_list
-        json = {}
-        for pl in placas:
-            json.update(pl.result_placa_secund)
+        json_master = placa_master.result_placa_master
+        json_slaves = {}
 
-        print(json)
+        for pl in placas:
+            json_slaves.update(pl.result_placa_secund)
+
+        json_complete = {**json_slaves , **json_master}
+        print(json_complete)
 
 
 class App:
