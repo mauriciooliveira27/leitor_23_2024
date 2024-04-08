@@ -2,6 +2,7 @@
 # from model import Db_information
 import requests
 import json
+from placa import PlacaMaster
 # db = Db_information("Termometria",3306,"192.168.15.50","scada","termometria")
 # conn = data_base.Connector(db)
 
@@ -50,23 +51,26 @@ import json
 # print(VALOR.__class__)
 
 
-cod = [1,2,3,4]
-ip = ['192.168.15.51','192.168.15.52','192.168.15.53','192.168.15.54']
+# cod = [1,2,3,4]
+# ip = ['192.168.15.51','192.168.15.52','192.168.15.53','192.168.15.54']
 
-for indice , c in enumerate(cod):
+# for indice , c in enumerate(cod):
     
-    i = ip[indice]
-    print(f"cod{c} ip {i}")
+#     i = ip[indice]
+#     print(f"cod{c} ip {i}")
 
-acumulado = {}
-r1 = {'ch1s1': '20.01'}
-acumulado.update(r1)
-r2 = {'ch2s2': '20.1'}
-acumulado.update(r2)
-r3 = {'ch3s3': '21.5'}
-acumulado.update(r3)
-
-
-print(acumulado)
+# acumulado = {}
+# r1 = {'ch1s1': '20.01'}
+# acumulado.update(r1)
+# r2 = {'ch2s2': '20.1'}
+# acumulado.update(r2)
+# r3 = {'ch3s3': '21.5'}
+# acumulado.update(r3)
 
 
+# print(acumulado)
+from manager_placa import ManagerPlacaMaster
+
+app = PlacaMaster()
+
+app.read_temp(ManagerPlacaMaster)
