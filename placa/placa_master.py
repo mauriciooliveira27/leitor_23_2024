@@ -25,7 +25,6 @@ class PlacaMaster(PlacaAbstract,ManagerPlacaMaster):
                 
                     c_int           =       int(c)
                     s_int           =       int(s)
-                    print(c_int)
                     self.mp.set_canal(c_int)
                     self.mp.set_sensor(s_int)
                     value_sensor    =       self.leitor.read_temp()

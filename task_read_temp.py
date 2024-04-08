@@ -51,12 +51,12 @@ class ManagerThreads(ManagerObjectPlacaSlave):
             tasks.append(th)
 
         th_master.start()
-        th_master.join()
+        
 
         [th.start() for th in tasks]
 
         [th.join() for th in tasks]
-
+        th_master.join()
     
         placas = self.get_list
         json_master = placa_master.result_placa_master
