@@ -12,7 +12,7 @@ import requests
 
 #Hardware
 from leitor_termo import Leitor_temp
-from multiplex import Multiplex3
+from placa.multiplex import Multiplex3
 
 #date time
 import time

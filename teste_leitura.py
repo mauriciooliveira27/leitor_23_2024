@@ -4,7 +4,7 @@
 import board
 import digitalio
 import adafruit_max31856
-from multiplex import Multiplex
+from placa.multiplex import Multiplex
 
 # Create sensor object, communicating over the board's default SPI bus
 spi = board.SPI()
