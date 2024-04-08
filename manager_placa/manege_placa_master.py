@@ -5,24 +5,12 @@ from model import registro_instalacao
 import threading
 import data_base
 from leitor_termo import Leitor_temp
+from base import Base
 
-
-class ManagerPlacaMaster:
+class ManagerPlacaMaster(Base):
 
         lista_CodSen                    =       []
         chave_cordoes                   =       []
-
-        def __init__(self) -> None:
-                self.db                     =       Db_information("Termometria",3306,"localhost","leitor_termo","termometria")
-                self.conn                   =       data_base.Connector(self.db)
-                self.conf                   =       self.conn.get_informaton_instal()
-                self.data_instal            =       json.loads(self.conf.dados)
-                self.dt                     =       datetime
-                self.registro_instal        =       registro_instalacao(0, self.conf.nome, self.conf.configuracao_fisica, self.dt.now(), "")
-                self.lock                   =       threading.RLock()
-                self.leitor                 =       Leitor_temp()
-                self.result_placa_master    =       None
-                self.execute()
         
         def execute(self):
                 with self.lock:

@@ -8,8 +8,7 @@ from factory import  FactoryPlacaSlave, FactoryPlacaMaster
 
 class ManagerObjectPlacaSlave(ManagerPlacaSlave):
 
-    _list_placa = []    
-
+    _list_placa = []
 
     def create_object(self):    
         self.cod = self._cod_placa
@@ -27,14 +26,12 @@ class ManagerObjectPlacaSlave(ManagerPlacaSlave):
         self.registro_instal.data                       =   self.dt.now()
         self.conn.insert_registro_instalacao(self.registro_instal)
 
-    
     @property
     def get_list(self):
         return self._list_placa
 
 
 class ManagerThreads(ManagerObjectPlacaSlave):
-
 
     def _init_threds(self):
         self.create_object()
@@ -76,7 +73,6 @@ class App:
 
         threads = ManagerThreads()
         threads._init_threds()
-
 
 if __name__ == "__main__":
 

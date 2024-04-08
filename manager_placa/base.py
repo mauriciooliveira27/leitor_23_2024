@@ -15,10 +15,10 @@ class Base:
         self.conf                       =       self.conn.get_informaton_instal()
         self.data_instal                =       json.loads(self.conf.dados)
         self.dt                         =       datetime
-        self.read_temp                  =       True
         self.registro_instal            =       registro_instalacao(0, self.conf.nome, self.conf.configuracao_fisica, self.dt.now(), "")
         self.result_placa_slave         =       None
         self.lock                       =       threading.RLock()
+        self.result_placa_master        =       None
         self.execute()
 
     
