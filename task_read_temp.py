@@ -17,7 +17,6 @@ class ManagerObjectPlacaSlave(ManagerPlacaSlave):
             _factory_placa = FactoryPlacaSlave()
             name = 'Placa' + f'{obj_str}'
             placa = _factory_placa.create_placa(name)
-            
             self._list_placa.append(placa)
 
 
@@ -37,7 +36,7 @@ class ManagerThreads(ManagerObjectPlacaSlave):
 
 
         for placa in self._list_placa:
-            th = threading.Thread(target=placa.read_temp)
+            th = threading.Thread(target=placa.read_temp())
 
             tasks.append(th)
 
