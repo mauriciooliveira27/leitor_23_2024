@@ -11,7 +11,7 @@ import requests
 import threading
 import traceback
 from manager_placa import ManagerPlacaSlave
-from factory import FactoryPlacaMaster, FactoryPlacaSlave
+from factory import  FactoryPlacaSlave
 
 
 class ManagerObjectPlacaSlave(ManagerPlacaSlave):
