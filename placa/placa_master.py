@@ -13,13 +13,12 @@ class PlacaMaster(PlacaAbstract,ManagerPlacaMaster):
     mp              =       Multiplex3()
 
     def __str__(self) -> str:
-        return 'Iniciando leitura Placa-Master'
+        print('Iniciando leitura Placa-Master')
     
     def read_temp(self):
         for canal in self.lista_CodSen:
             sensores            =       list(canal.values())
             sensores_list       =       sensores[0]
-    
             #Set hardware channel and sensor
             for c in canal:
         

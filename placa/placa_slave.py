@@ -18,7 +18,7 @@ class PlacaSlave(PlacaAbstract,ManagerPlacaSlave):
         
 
     def __str__(self) -> str:
-        return 'Iniciando leitura Placa-Slave' + f'{self.ip_placa}'
+        print ('Iniciando leitura Placa-Slave' + f'{self.ip_placa}')
     
 
     def read_temp(self):
@@ -41,7 +41,7 @@ class PlacaSlave(PlacaAbstract,ManagerPlacaSlave):
 
         lista_final         =   [{canal:sensores} for canal , sensores in resultado_agrupado.items()]#cria lista de dicionario [{1:[1,2,3,4,5]},{2:[1,2,3,4,5]},{3:[1,2,3,4,5]}] a api espera essa estrutura
         erro = 0
-        while erro < 1:
+        while erro < 3:
             try:
                 url                 =   f'http://{self.ip_placa}/api/get_temp/'
                 response            =   requests.post(url, json=lista_final)   
@@ -67,6 +67,7 @@ class PlacaSlave(PlacaAbstract,ManagerPlacaSlave):
                 print('Erro de requisição:', e)
                 print('dentro do except')
                 print(erro)
+                time.sleep(30)
                 
 
             except Exception as e:
@@ -80,6 +81,6 @@ class PlacaSlave(PlacaAbstract,ManagerPlacaSlave):
                 traceback.print_exc()
                 time.sleep(30)
 
-            if erro == 1:
+            if erro == 3:
                 self.result_placa_secund = {chave: '' for chave in chave_cordoes }
                 break
