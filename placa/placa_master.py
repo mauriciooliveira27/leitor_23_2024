@@ -1,6 +1,6 @@
 import time
 from .placa_abs import PlacaAbstract
-from .multiplex import Multiplex3
+from multiplex import Multiplex3
 from typing import Type
 from manager_placa import ManagerPlacaMaster
 from leitor_termo import Leitor_temp
