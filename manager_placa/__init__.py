@@ -1,1 +1,1 @@
-from manege_placa_master import ManagerPlacaMaster
+from .manege_placa_master import ManagerPlacaMaster
