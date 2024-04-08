@@ -7,14 +7,15 @@ from .placa_abs import PlacaAbstract
 import data_base
 from model import Db_information
 import data_base
+from manager_placa import ManagerPlacaSlave
 
 
-class PlacaSlave(PlacaAbstract):
+class PlacaSlave(PlacaAbstract,ManagerPlacaSlave):
 
     def __init__(self, ip_placa, cod_placa) -> None:
-        self.ip_placa = ip_placa
-        self.cod_placa = cod_placa
-        self.result_placa_secund = None
+        self.ip_placa               =   ip_placa
+        self.cod_placa              =   cod_placa
+        
 
     def __str__(self) -> str:
         return 'Iniciando leitura Placa-Slave' + f'{self.ip_placa}'

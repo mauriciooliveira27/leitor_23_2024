@@ -68,16 +68,16 @@ class ManagerThreads(ManagerObjectPlacaSlave):
 
 
 class App:
-
     def run(self):
 
         threads = ManagerThreads()
         threads._init_threds()
 
 if __name__ == "__main__":
-
-    app = App()
-    app.run()
+    dt = datetime
+    if dt.now().minute == 0 and dt.now().second < 5:
+        app = App()
+        app.run()
 
 
 
