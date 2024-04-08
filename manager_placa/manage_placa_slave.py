@@ -1,4 +1,4 @@
-from base import Base
+from .base import Base
 class ManagerPlacaSlave(Base):
 
     _cod_placa  =   []
