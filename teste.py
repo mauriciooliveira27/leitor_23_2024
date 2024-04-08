@@ -69,7 +69,7 @@ from placa import PlacaMaster
 
 
 # print(acumulado)
-from manager_placa import ManagerPlacaMaster
+# from manager_placa import ManagerPlacaMaster
 from manager_placa import ManagerPlacaSlave
 # app = PlacaMaster()
 
