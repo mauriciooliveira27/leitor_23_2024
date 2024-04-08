@@ -35,6 +35,7 @@ class ManagerThreads(ManagerObjectPlacaSlave):
         tasks = []
         print(self.ip)
         print(self.cod)
+        print('teste')
 
         for placa in self._list_placa:
             th = threading.Thread(target=placa.read_temp, args=())
