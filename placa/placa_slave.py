@@ -80,6 +80,6 @@ class PlacaSlave(PlacaAbstract):
                 traceback.print_exc()
                 time.sleep(30)
 
-            if erro == 3:
+            if erro == 1:
                 self.result_placa_secund = {chave: '' for chave in chave_cordoes }
                 break
