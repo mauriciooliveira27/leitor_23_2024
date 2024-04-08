@@ -17,7 +17,7 @@ class PlacaSlave(PlacaAbstract):
         self.result_placa_secund = None
 
     def __str__(self) -> str:
-        return self.ip_placa
+        return 'Iniciando leitura Placa-Slave' + f'{self.ip_placa}'
     
 
     def read_temp(self):
