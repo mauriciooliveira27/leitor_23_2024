@@ -9,7 +9,7 @@ from leitor_termo import Leitor_temp
 class PlacaMaster(PlacaAbstract):
 
     leituras        =       []
-    mp              =       Multiplex3
+    #mp              =       Multiplex3
 
     def __init__(self) -> None:
         self.leitor                 =       Leitor_temp()
