@@ -73,4 +73,4 @@ from manager_placa import ManagerPlacaMaster
 
 app = PlacaMaster()
 
-app.read_temp(ManagerPlacaMaster)
+app.read_temp(ManagerPlacaMaster())
