@@ -3,7 +3,7 @@ from datetime import date
 from datetime import datetime
 import threading
 from manager_placa import ManagerPlacaSlave
-from factory import  FactoryPlacaSlave
+from factory import  FactoryPlacaSlave, FactoryPlacaMaster
 
 
 class ManagerObjectPlacaSlave(ManagerPlacaSlave):
@@ -39,14 +39,18 @@ class ManagerThreads(ManagerObjectPlacaSlave):
     def _init_threds(self):
         self.create_object()
         tasks = []
-        print(self.ip)
-        print(self.cod)
-        print('teste')
+
+        placa_master = FactoryPlacaMaster()
+
+        th_master = threading.Thread(target=placa_master.read_temp)
 
         for placa in self._list_placa:
             th = threading.Thread(target=placa.read_temp)
 
             tasks.append(th)
+            
+        th_master.start()
+        th_master.join()
 
         [th.start() for th in tasks]
 
@@ -59,6 +63,7 @@ class ManagerThreads(ManagerObjectPlacaSlave):
             json.update(pl.result_placa_secund)
 
         print(json)
+
 
 class App:
 
