@@ -11,7 +11,8 @@ class ManagerObjectPlacaSlave(ManagerPlacaSlave):
     _list_placa = []
 
     def create_object(self):    
-        
+        print(self._ip_placa)
+        print(self._cod_placa)
         for obj in self._cod_placa:
             obj_str = str(obj)
             _factory_placa = FactoryPlacaSlave()
