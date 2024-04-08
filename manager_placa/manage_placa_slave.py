@@ -27,7 +27,7 @@ class ManagerPlacaSlave:
 
     def execute(self):
         with self.lock:
-            self.result_placa_secund    =       self.conn.select_data_placa_secun()
+            self.result_placa_secund    =       self.conn.select_placa_secund()
         cod_placa       =   [cod['cod_placa'] for cod in self.result_placa_secund]
         ip_placa        =   [ip['ip'] for ip in self.result_placa_secund]
 
