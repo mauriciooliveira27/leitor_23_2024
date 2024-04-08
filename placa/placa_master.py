@@ -14,12 +14,14 @@ class PlacaMaster(PlacaAbstract,Multiplex3):
     def __init__(self) -> None:
         self.leitor                 =       Leitor_temp()
         self.result_placa_master    =       None
+        
 
 
-    def read_temp(self, placa : Type[ManagerPlacaMaster] ):
+    def read_temp(self, placa : Type[ManagerPlacaMaster]):
 
         placa.execute()
         for canal in placa.lista_CodSen:
+            print(canal)
             canals              =       canal.keys()
             sensores            =       list(canal.values())
             sensores_list       =       sensores[0]

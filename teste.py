@@ -70,9 +70,12 @@ from placa import PlacaMaster
 
 # print(acumulado)
 from manager_placa import ManagerPlacaMaster
-
+from manager_placa import ManagerPlacaSlave
 app = PlacaMaster()
 
 app.read_temp(ManagerPlacaMaster())
 
 print(app.result_placa_master)
+
+manage_slave = ManagerPlacaSlave()
+print(manage_slave._ip_placa)

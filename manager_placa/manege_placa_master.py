@@ -19,7 +19,7 @@ class ManagerPlacaMaster:
                 self.dt                     =       datetime
                 self.read_temp              =       True
                 self.registro_instal        =       registro_instalacao(0, self.conf.nome, self.conf.configuracao_fisica, self.dt.now(), "")
-                self.reult_placa_master       =       None
+                self.reult_placa_master     =       None
                 self.lock                   =       threading.RLock()
                 self.execute()
         
