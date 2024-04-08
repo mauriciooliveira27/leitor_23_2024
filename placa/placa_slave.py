@@ -11,7 +11,14 @@ import data_base
 
 class PlacaSlave(PlacaAbstract):
 
+    def __init__(self, name) -> None:
+        self.name = name
 
+
+    def __str__(self) -> str:
+        return self.name
+    
+    
     def read_temp(self, cod_placa,ip_placa):
         resultado_agrupado      =   {}#agrupando em dicionario os canal e sensores EX: {1:[1,2,3,4,5]}
         chave_cordoes           =   []#salvo em lista os nomes dos cordeos fisicos EX: 'Ch1S1'

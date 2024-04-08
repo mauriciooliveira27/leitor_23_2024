@@ -70,12 +70,15 @@ import json
 
 # print(acumulado)
 # from manager_placa import ManagerPlacaMaster
-from manager_placa import ManagerPlacaSlave
+# from manager_placa import ManagerPlacaSlave
 # app = PlacaMaster()
 
 # app.read_temp(ManagerPlacaMaster())
 
 # print(app.result_placa_master)
 
-manage_slave = ManagerPlacaSlave()
-print(manage_slave._ip_placa)
+from task_read_temp import ManagerObjectPlacaSlave
+
+teste = ManagerObjectPlacaSlave()
+
+print(teste._list_placa)

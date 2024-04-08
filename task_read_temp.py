@@ -11,10 +11,21 @@ import requests
 import threading
 import traceback
 from manager_placa import ManagerPlacaSlave
-class ManagerObjectPlaca(ManagerPlacaSlave):
+from factory import FactoryPlacaMaster, FactoryPlacaSlave
+
+
+class ManagerObjectPlacaSlave(ManagerPlacaSlave):
+
+    _list_placa = []
+    _factory_placa = FactoryPlacaSlave()
 
     def create_object(self):
-
+        
+        for obj in self._cod_placa:
+            obj_str = str(obj)
+            name = 'Placa' + f'{obj_str}'
+            placa = self._factory_placa.create_placa(name)
+            self._list_placa.append(placa)
 
 
 

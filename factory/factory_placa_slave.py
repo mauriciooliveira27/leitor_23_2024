@@ -4,5 +4,5 @@ from placa import PlacaSlave
 
 class FactoryPlacaSlave(FactoryPlacaAbs):
 
-    def create_placa(self):
-        return PlacaSlave()
+    def create_placa(self, name):
+        return PlacaSlave(name)
