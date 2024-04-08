@@ -9,14 +9,14 @@ from factory import  FactoryPlacaSlave
 class ManagerObjectPlacaSlave(ManagerPlacaSlave):
 
     _list_placa = []
-    _factory_placa = FactoryPlacaSlave()
 
-    def create_object(self):
+    def create_object(self):    
         
         for obj in self._cod_placa:
             obj_str = str(obj)
+            _factory_placa = FactoryPlacaSlave()
             name = 'Placa' + f'{obj_str}'
-            placa = self._factory_placa.create_placa(name)
+            placa = _factory_placa.create_placa(name)
             
             self._list_placa.append(placa)
 
@@ -58,7 +58,7 @@ if __name__ == "__main__":
 
     app = App()
     app.run()
-    
+
 
 
  
