@@ -65,7 +65,7 @@ class ManagerThreads(ManagerObjectPlacaSlave):
         for pl in placas:
             json_slaves.update(pl.result_placa_secund)
 
-        json_complete = {**json_slaves , **json_master}
+        json_complete = {**json_master,**json_slaves }
         print(json_complete)
 
 
