@@ -18,7 +18,6 @@ class ManagerPlacaMaster:
                 self.conf                   =       self.conn.get_informaton_instal()
                 self.data_instal            =       json.loads(self.conf.dados)
                 self.dt                     =       datetime
-                self.read_temp              =       True
                 self.registro_instal        =       registro_instalacao(0, self.conf.nome, self.conf.configuracao_fisica, self.dt.now(), "")
                 self.lock                   =       threading.RLock()
                 self.leitor                 =       Leitor_temp()
