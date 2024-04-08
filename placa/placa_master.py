@@ -15,7 +15,6 @@ class PlacaMaster(PlacaAbstract,ManagerPlacaMaster):
     def read_temp(self):
         for canal in self.lista_CodSen:
             print(canal)
-            canals              =       canal.keys()
             sensores            =       list(canal.values())
             sensores_list       =       sensores[0]
     
@@ -26,6 +25,7 @@ class PlacaMaster(PlacaAbstract,ManagerPlacaMaster):
                 
                     c_int           =       int(c)
                     s_int           =       int(s)
+                    print(c_int)
                     self.mp.set_canal(c_int)
                     self.mp.set_sensor(s_int)
                     value_sensor    =       self.leitor.read_temp()
