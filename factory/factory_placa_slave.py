@@ -1,4 +1,4 @@
-from facotry_abs import FactoryPlacaAbs
+from .facotry_abs import FactoryPlacaAbs
 from placa import PlacaSlave
 
 
