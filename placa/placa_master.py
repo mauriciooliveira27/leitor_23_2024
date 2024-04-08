@@ -10,7 +10,7 @@ import json
 class PlacaMaster(PlacaAbstract,ManagerPlacaMaster):
 
     leituras        =       []
-    mp              =       Multiplex3
+    mp              =       Multiplex3()
 
     def read_temp(self):
         for canal in self.lista_CodSen:
