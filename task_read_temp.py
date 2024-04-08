@@ -12,13 +12,14 @@ class ManagerObjectPlacaSlave(ManagerPlacaSlave):
 
 
     def create_object(self):    
-        self.cod = self._ip_placa
-        self.ip = self._cod_placa
-        for obj in self._cod_placa:
-            obj_str = str(obj)
+        self.cod = self._cod_placa
+        self.ip = self._ip_placa
+
+        for indice , obj in  enumerate(self._cod_placa):
             _factory_placa = FactoryPlacaSlave()
-            name = 'Placa' + f'{obj_str}'
-            placa = _factory_placa.create_placa(name)
+            ip = self.ip[indice]
+
+            placa = _factory_placa.create_placa(obj , ip)
             self._list_placa.append(placa)
 
     def save(self, data):
@@ -30,7 +31,7 @@ class ManagerObjectPlacaSlave(ManagerPlacaSlave):
 class ManagerThreads(ManagerObjectPlacaSlave):
 
 
-    def init_threds(self):
+    def _init_threds(self):
         self.create_object()
         tasks = []
         print(self.ip)
@@ -38,7 +39,7 @@ class ManagerThreads(ManagerObjectPlacaSlave):
         print('teste')
 
         for placa in self._list_placa:
-            th = threading.Thread(target=placa.read_temp, args=())
+            th = threading.Thread(target=placa.read_temp)
 
             tasks.append(th)
 
@@ -52,7 +53,7 @@ class App:
     def run(self):
 
         threads = ManagerThreads()
-        threads.init_threds()
+        threads._init_threds()
 
 
 if __name__ == "__main__":

@@ -11,22 +11,23 @@ import data_base
 
 class PlacaSlave(PlacaAbstract):
 
-    def __init__(self, name) -> None:
-        self.name = name
+    def __init__(self, ip_placa, cod_placa) -> None:
+        self.ip_placa = ip_placa
+        self.cod_placa = cod_placa
 
 
     def __str__(self) -> str:
-        return self.name
+        return self.ip_placa
     
-    
-    def read_temp(self, cod_placa,ip_placa):
+
+    def read_temp(self):
         resultado_agrupado      =   {}#agrupando em dicionario os canal e sensores EX: {1:[1,2,3,4,5]}
         chave_cordoes           =   []#salvo em lista os nomes dos cordeos fisicos EX: 'Ch1S1'
         data_placa              =   None
         data_temp               =   {}
         self.db                 =   Db_information("Termometria",3306,"localhost","leitor_termo","termometria")
         self.conn               =   data_base.Connector(self.db)
-        data_placa              =   self.conn.select_data_placa_secun(cod_placa) #pega os dados da placa
+        data_placa              =   self.conn.select_data_placa_secun(self.cod_placa) #pega os dados da placa
         for item in data_placa:
                 canal           =   item['canal_placa']#pega canal 
                 id_sensor       =   item['sensor_placa']#pega o sensor
@@ -39,10 +40,10 @@ class PlacaSlave(PlacaAbstract):
 
         lista_final         =   [{canal:sensores} for canal , sensores in resultado_agrupado.items()]#cria lista de dicionario [{1:[1,2,3,4,5]},{2:[1,2,3,4,5]},{3:[1,2,3,4,5]}] a api espera essa estrutura
         erro = 0
-        print(ip_placa)
+        print(self.ip_placa)
         while erro < 3:
             try:
-                url                 =   f'http://{ip_placa}/api/get_temp/'
+                url                 =   f'http://{self.ip_placa}/api/get_temp/'
                 response            =   requests.post(url, json=lista_final)   
                 leituras            =   response.text
                 status_cod          =   response.status_code
