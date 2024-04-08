@@ -23,37 +23,42 @@ class ManagerObjectPlacaSlave(ManagerPlacaSlave):
 
 
 
-# def save(self, data):
-#     self.registro_instal.registros_temperaturas     =   json.dumps(data)
-#     self.registro_instal.data                       =   self.dt.now()
-#     self.conn.insert_registro_instalacao(self.registro_instal)
+    def save(self, data):
+        self.registro_instal.registros_temperaturas     =   json.dumps(data)
+        self.registro_instal.data                       =   self.dt.now()
+        self.conn.insert_registro_instalacao(self.registro_instal)
+
+class ManagerThreads(ManagerObjectPlacaSlave):
 
 
-# def main():
-#     app = App()
-#     th1 = threading.Thread(target=app.exe_read_temp)
-#     th2 = threading.Thread(target=app.read_temp_placa_secun)
-
-#     th1.start()
-#     th2.start()
-
-#     th1.join()
-#     th2.join()
-
-#     JSON1 = app.reult_placa_main
-#     JSON2 = app.result_placa_secund
-
-#     if JSON2 != None:
-#         JSON_COMPLETE   =   {**JSON1, **JSON2}
-#         app.save(JSON_COMPLETE)
-#         return
-#     elif JSON2 == None:
-#         app.save(JSON1)
-#         return
+    def _init_threds(self):
+        self.create_object()
+        tasks = []
 
 
-# if __name__ == '__main__':
+        for placa in self._list_placa:
+            th = threading.Thread(target=placa.read_temp)
+
+            tasks.append(th)
+
+        [th.start() for th in tasks]
+
+        [th.join() for th in tasks]
+
+
+class App:
+
+    def run(self):
+
+        threads = ManagerThreads()
+        threads._init_threds()
+
+
+if __name__ == "__main__":
+
+    app = App()
+    app.run()
     
-#     dt = datetime
-#     if dt.now().minute == 0 and dt.now().second < 5:
-#         main()
+
+
+ 
