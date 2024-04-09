@@ -18,7 +18,7 @@ class PlacaSlave(PlacaAbstract,ManagerPlacaSlave):
         
 
     def __str__(self) -> str:
-        print ('Iniciando leitura Placa-Slave' + f'{self.ip_placa}')
+        return 'Iniciando leitura Placa-Slave' + f'{self.ip_placa}'
     
 
     def read_temp(self):
@@ -26,9 +26,8 @@ class PlacaSlave(PlacaAbstract,ManagerPlacaSlave):
         chave_cordoes           =   []#salvo em lista os nomes dos cordeos fisicos EX: 'Ch1S1'
         data_placa              =   None
         data_temp               =   {}
-        self.db                 =   Db_information("Termometria",3306,"localhost","leitor_termo","termometria")
-        self.conn               =   data_base.Connector(self.db)
         data_placa              =   self.conn.select_data_placa_secun(self.cod_placa) #pega os dados da placa
+
         for item in data_placa:
                 canal           =   item['canal_placa']#pega canal 
                 id_sensor       =   item['sensor_placa']#pega o sensor
@@ -58,26 +57,17 @@ class PlacaSlave(PlacaAbstract,ManagerPlacaSlave):
 
                 elif status_cod != 200:
                     erro += 1
-                    print("DENTRO DO ELIF : STATUS_CODE != 200",)
                     time.sleep(30)
 
             except requests.exceptions.RequestException as e:
             
                 erro += 1
-                print('Erro de requisição:', e)
-                print('dentro do except')
-                print(erro)
                 time.sleep(30)
                 
 
             except Exception as e:
                 
                 erro += 1
-                print('Erro:', e)
-                print('dentro do except')
-                print(erro)
-                print(f"Erro: {type(e).__name__} - {e}")
-                print("Traceback (linha onde ocorreu o erro):")
                 traceback.print_exc()
                 time.sleep(30)
 

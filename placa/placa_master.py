@@ -13,7 +13,7 @@ class PlacaMaster(PlacaAbstract,ManagerPlacaMaster):
     mp              =       Multiplex3()
 
     def __str__(self) -> str:
-        print('Iniciando leitura Placa-Master')
+        return 'Iniciando leitura Placa-Master'
     
     def read_temp(self):
         for canal in self.lista_CodSen:
