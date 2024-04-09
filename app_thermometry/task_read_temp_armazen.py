@@ -2,7 +2,7 @@ import json
 from datetime import date
 from datetime import datetime
 import threading
-from manager_placa.manage_placa_slave import ManagerPlacaSlave
+from manager_placa import ManagerPlacaSlave
 from factory.factory_placa_master import  FactoryPlacaMaster
 from factory.factory_placa_slave import  FactoryPlacaSlave
 
