@@ -25,29 +25,31 @@ class ManagerObjectPlacaSlave(ManagerPlacaSlave):
         return self._list_placa
 
 
-class ManagerThreads(ManagerObjectPlacaSlave):
+class ManagerThreads:
+
+    manager_object_slave    =   ManagerObjectPlacaSlave
+    tasks                   =   []
+    factory_master          =   FactoryPlacaMaster()
+    placa_master            =   factory_master.create_placa()
+    th_master               =   threading.Thread(target=placa_master.read_temp)
 
     def _init_threds(self):
-        self.manager_object()
-        tasks           =   []
-        factory_master  =   FactoryPlacaMaster()
-        placa_master    =   factory_master.create_placa()
-        th_master       =   threading.Thread(target=placa_master.read_temp)
+        self.manager_object_slave.manager_object()
 
-        for placa in self._list_placa:
+        for placa in self.manager_object_slave._list_placa:
             th = threading.Thread(target=placa.read_temp)
-            tasks.append(th)
+            self.tasks.append(th)
 
-        th_master.start()
+        self.th_master.start()
         
 
-        [th.start() for th in tasks]
-        [th.join() for th in tasks]
+        [th.start() for th in self.tasks]
+        [th.join() for th in self.tasks]
 
-        th_master.join()
+        self.th_master.join()
     
-        placas          =   self.get_list
-        json_master     =   placa_master.result_placa_master
+        placas          =   self.manager_object_slave.get_list
+        json_master     =   self.placa_master.result_placa_master
         json_slaves     =   {}
 
         for pl in placas:
@@ -55,7 +57,7 @@ class ManagerThreads(ManagerObjectPlacaSlave):
 
         json_complete = {**json_master,**json_slaves }
 
-        placa_master.save(json_complete)
+        self.placa_master.save(json_complete)
 
 
 class App:
