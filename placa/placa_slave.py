@@ -15,6 +15,8 @@ class PlacaSlave(PlacaAbstract,ManagerPlacaSlave):
     def __init__(self, ip_placa, cod_placa) -> None:
         self.ip_placa               =   ip_placa
         self.cod_placa              =   cod_placa
+        self.db                         =       Db_information("Termometria",3306,"localhost","leitor_termo","termometria")
+        self.conn                       =       data_base.Connector(self.db)
         
 
     def __str__(self) -> str:
