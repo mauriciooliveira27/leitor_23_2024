@@ -35,29 +35,27 @@ class ManagerThreads:
 
     def _init_threds(self):
         self.manager_object_slave.manager_object()
-
         for placa in self.manager_object_slave._list_placa:
             th = threading.Thread(target=placa.read_temp)
             self.tasks.append(th)
 
         self.th_master.start()
-        
-
         [th.start() for th in self.tasks]
         [th.join() for th in self.tasks]
-
         self.th_master.join()
     
+        
+        leituras_master     =   self.placa_master.result_placa_master
+        leituras_slaves     =   {}
+
         placas          =   self.manager_object_slave.get_list
-        json_master     =   self.placa_master.result_placa_master
-        json_slaves     =   {}
 
         for pl in placas:
-            json_slaves.update(pl.result_placa_secund)
+            leituras_slaves.update(pl.result_placa_secund)
 
-        json_complete = {**json_master,**json_slaves }
+        leituras_completas = {**leituras_master,**leituras_slaves }
 
-        self.placa_master.save(json_complete)
+        self.placa_master.save(leituras_completas)
 
 
 class App:
@@ -69,9 +67,9 @@ class App:
 
 if __name__ == "__main__":
     dt = datetime
-
-    app     =   App()
-    app.run()
+    if dt.now().minute == 0 and dt.now().second < 30:
+        app     =   App()
+        app.run()
 
 
 
