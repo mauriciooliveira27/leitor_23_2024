@@ -28,7 +28,7 @@ class ManagerObjectPlacaSlave(ManagerPlacaSlave):
 class ManagerThreads(ManagerObjectPlacaSlave):
 
     def _init_threds(self):
-        self.create_object()
+        self.manager_object()
         tasks           =   []
         factory_master  =   FactoryPlacaMaster()
         placa_master    =   factory_master.create_placa()
