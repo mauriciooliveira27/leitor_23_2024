@@ -27,7 +27,7 @@ class ManagerObjectPlacaSlave(ManagerPlacaSlave):
 
 class ManagerThreads:
 
-    manager_object_slave    =   ManagerObjectPlacaSlave
+    manager_object_slave    =   ManagerObjectPlacaSlave()
     tasks                   =   []
     factory_master          =   FactoryPlacaMaster()
     placa_master            =   factory_master.create_placa()
