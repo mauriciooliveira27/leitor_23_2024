@@ -59,7 +59,6 @@ class ManagerThreads:
 
 
 class App:
-    
     def run(self):
 
         threads = ManagerThreads()
