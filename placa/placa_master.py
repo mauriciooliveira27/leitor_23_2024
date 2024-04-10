@@ -29,7 +29,7 @@ class PlacaMaster(PlacaAbstract,ManagerPlacaMaster):
                     self.mp.set_canal(c_int)
                     self.mp.set_sensor(s_int)
                     value_sensor    =       self.leitor.read_temp()
-                    time.sleep(1)
+                    time.sleep(0.3)
                     self.leituras.append(f'{value_sensor:.2f}')
 
         resultado               =   dict(zip(self.chave_cordoes, self.leituras))
