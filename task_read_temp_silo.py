@@ -8,7 +8,6 @@ from factory.factory_placa_slave import  FactoryPlacaSlave
 import time
 
 class App:
-
     placa = FactoryPlacaMaster()
     placa_master = placa.create_placa()
 
@@ -18,8 +17,8 @@ class App:
 
 
 if __name__ ==  '__main__':
-
     dt = datetime
+    App.run()
     if dt.now().minute == 0 and dt.now().second < 30:
         App.run()
         time.sleep(5)
