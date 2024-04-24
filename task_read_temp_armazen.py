@@ -64,6 +64,7 @@ class App:
         threads = ManagerThreads()
         threads._init_threds()
 
+
 if __name__ == "__main__":
     dt = datetime
     if dt.now().minute == 0 and dt.now().second < 30:
