@@ -13,8 +13,8 @@ class App:
 
     @classmethod
     def run(cls):
-        cls.placa_master.read_temp()
-        cls.placa_master.save()
+        leitura = cls.placa_master.read_temp()
+        cls.placa_master.save(leitura)
 
 
 if __name__ ==  '__main__':
