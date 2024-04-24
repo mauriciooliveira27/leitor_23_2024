@@ -3,7 +3,6 @@ from abc import ABC, abstractmethod
 
 
 
-
 class FactoryPlacaAbs(ABC):
 
     @abstractmethod

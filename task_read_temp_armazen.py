@@ -6,19 +6,19 @@ from manager_placa import ManagerPlacaSlave
 from factory.factory_placa_master import  FactoryPlacaMaster
 from factory.factory_placa_slave import  FactoryPlacaSlave
 
-class ManagerObjectPlacaSlave(ManagerPlacaSlave):
+class ManagerObjectPlaca(ManagerPlacaSlave):
 
     _list_placa = []
     def manager_object(self):    
         self.cod    =   self._cod_placa
         self.ip     =   self._ip_placa
 
-        for indice , obj in  enumerate(self._cod_placa):
+        for indice , cod in  enumerate(self._cod_placa):
 
             _factory_placa = FactoryPlacaSlave()
             ip      =   self.ip[indice]
-            placa   =   _factory_placa.create_placa(ip, obj)
-            self._list_placa.append(placa)
+            placa   =   _factory_placa.create_placa(ip, cod)
+            self._list_placa.append(placa)  
 
     @property
     def get_list(self):
@@ -27,7 +27,7 @@ class ManagerObjectPlacaSlave(ManagerPlacaSlave):
 
 class ManagerThreads:
 
-    manager_object_slave    =   ManagerObjectPlacaSlave()
+    manager_object_slave    =   ManagerObjectPlaca()
     tasks                   =   []
     factory_master          =   FactoryPlacaMaster()
     placa_master            =   factory_master.create_placa()
