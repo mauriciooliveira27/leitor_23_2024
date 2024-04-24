@@ -14,11 +14,13 @@ class App:
     @classmethod
     def run(cls):
         cls.placa_master.read_temp()
+        cls.placa_master.save()
 
 
 if __name__ ==  '__main__':
     dt = datetime
     App.run()
+    
     if dt.now().minute == 0 and dt.now().second < 30:
         App.run()
         time.sleep(5)
