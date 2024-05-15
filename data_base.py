@@ -213,7 +213,7 @@ class Connector:
         except mariadb.Error as e:
             #print(f"Error: {e}")
             #print(f"UPDATE receita_aeracao SET dados_on_line = '{receita_on_line}', " +
-                f" atualizada_em = '{data_atualizacao}', status = {status} WHERE codigo = {codigo}")
+                f" atualizada_em = '{data_atualizacao}', status = {status} WHERE codigo = {codigo}"
         self.conn.commit()
         self.conn.close()
 
