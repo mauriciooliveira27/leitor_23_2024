@@ -2,9 +2,9 @@ from pyModbusTCP.server import ModbusServer, DataBank
 from time import sleep
 from datetime import datetime
 from datetime import date
-from db_information import db_information
-import data_base
-from model import estacao_mt
+from core.db_information import db_information
+from core import data_base
+from core.model import estacao_mt
 
 #connect data base
 _db_connect = db_information()

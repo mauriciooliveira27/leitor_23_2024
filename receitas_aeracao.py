@@ -1,13 +1,13 @@
 #Modulos
 #Data Base
-import model
-import data_base
+from core import model
+from core import data_base
 import json
-import decoder_receitas
+from core import decoder_receitas
 from time import sleep
-from model import dados_on_line_receia_aeracao
-from calc_medias import calc
-import calc_medias
+from core.model import dados_on_line_receia_aeracao
+from core.calc_medias import calc
+import core.calc_medias
 from datetime import datetime
 
 #date time
