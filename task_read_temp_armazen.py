@@ -67,9 +67,10 @@ class App:
 
 if __name__ == "__main__":
     dt = datetime
-    if dt.now().minute == 0 and dt.now().second < 30:
-        app     =   App()
-        app.run()
+    while True:
+        if dt.now().minute == 0 and dt.now().second < 30:
+            app     =   App()
+            app.run()
 
 
 

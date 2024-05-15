@@ -13,14 +13,10 @@ def validar(data,data_embarcado):
     create_web          =       data[0]['criado_em']
     atualizado_web      =       data[0]['atualizado_em']
 
-    print(f'embarcado:{criado_embarcado}')
-    print(f"hora criado web:{create_web}")
-    print(f"hora atualizado web:{atualizado_web}")
 
 
     if criado_embarcado < atualizado_web:
         atualizar_dias_habilita(data)
-        print("WEB MAIS ATUAL")
         return True
     
     elif criado_embarcado > atualizado_web:
@@ -45,8 +41,7 @@ def atualizar_dias_habilita(jsons):
             sex                         =        condicoes_dias_semana['Sexta']
             sab                         =        condicoes_dias_semana['Sábado']
             db                          =        MysqlConnection()
-            print(condicoes_dias_semana)
-
+           
 
         if 'temperatura_minima' in item and item['temperatura_minima'] is not None:
             temp_min                =       float(jsons[0]['temperatura_minima'])
