@@ -77,7 +77,7 @@ import json
 
 # print(app.result_placa_master)
 
-from core.task_read_temp_armazen import ManagerObjectPlacaSlave
+from task_read_temp_armazen import ManagerObjectPlacaSlave
 
 teste = ManagerObjectPlacaSlave()
 teste.create_object()
