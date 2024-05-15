@@ -1,4 +1,4 @@
-from task_read_temp_armazen import App
+from core.task_read_temp_armazen import App
 
 
 
