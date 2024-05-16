@@ -1,4 +1,4 @@
-from core.project_receita import App
+from project_receita import App
 
 if __name__ == '__main__':
     App.execute()
