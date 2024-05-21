@@ -6,3 +6,5 @@ def teste():
     result = app.run()
     print(result)
     return result
+
+teste()
