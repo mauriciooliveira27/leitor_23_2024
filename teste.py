@@ -1,6 +1,8 @@
 from task_read_temp import App
 
 
-
-app = App()
-app.run()
+def teste():
+    app = App()
+    result = app.run()
+    print(result)
+    return result

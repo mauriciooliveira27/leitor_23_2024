@@ -57,12 +57,15 @@ class ManagerThreads:
 
         self.placa_master.save(leituras_completas)
 
+        return leituras_completas
+
 
 class App:
     def run(self):
 
         threads = ManagerThreads()
-        threads._init_threds()
+        result = threads._init_threds()
+        return result
 
 
 if __name__ == "__main__":
