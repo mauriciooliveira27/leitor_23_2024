@@ -48,7 +48,7 @@ class ManagerThreads:
         leituras_master     =   self.placa_master.result_placa_master
         leituras_slaves     =   {}
 
-        placas          =   self.manager_object_slave.get_list
+        placas              =   self.manager_object_slave.get_list
 
         for pl in placas:
             leituras_slaves.update(pl.result_placa_secund)

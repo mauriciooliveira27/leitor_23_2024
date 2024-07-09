@@ -29,7 +29,7 @@ class TreatingResponses:
         if 'application/json' in content_type:
             response_json       =       json.loads(response.read().decode('utf-8'))
             response_api        =       response_json
-            result              =       validar(response_api,dados_enviar)
+            result              =       validar(response_api,dados_enviar,dados_receita)
 
             if result == True:
                 #print("web mais atual , atualiando embarcado")
@@ -65,9 +65,9 @@ class TreatingResponses:
             
             return content_type
 class Main:
-
+    
     def enviar_dados_receita(self):
-        global dados_enviar
+        global dados_enviar,dados_receita
         self.request        =       Request('api.sinapsesolucoes.com','/publico/integracao/unidade-armazenamento/configuracao-receita')
         tentativas          =       5
         tratamento          =       TreatingResponses()

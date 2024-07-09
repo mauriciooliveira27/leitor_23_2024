@@ -1,10 +1,9 @@
-
 from datetime import datetime
 import json
 from .database import MysqlConnection
 
 
-def validar(data,data_embarcado):
+def validar(data,data_embarcado,dados_receita):
     global create_web,atualizado_web
 
     data                =       data
@@ -16,7 +15,8 @@ def validar(data,data_embarcado):
 
 
     if criado_embarcado < atualizado_web:
-        atualizar_dias_habilita(data)
+        print(dados_receita)
+        atualizar_dias_habilita(data,dados_receita)
         return True
     
     elif criado_embarcado > atualizado_web:
@@ -26,7 +26,7 @@ def validar(data,data_embarcado):
         return "integrações atualizadas"
 
 
-def atualizar_dias_habilita(jsons):
+def atualizar_dias_habilita(jsons,dados_receita):
     dias_semana_habilita        =       ['Domingo', 'Segunda', 'Terça', 'Quarta', 'Quinta', 'Sexta', 'Sábado']
 
     # Assuming create_web is a list of items, and you want to check the presence of days in each item
@@ -42,6 +42,7 @@ def atualizar_dias_habilita(jsons):
             sab                         =        condicoes_dias_semana['Sábado']
             db                          =        MysqlConnection()
            
+
 
         if 'temperatura_minima' in item and item['temperatura_minima'] is not None:
             temp_min                =       float(jsons[0]['temperatura_minima'])
@@ -131,10 +132,25 @@ def atualizar_dias_habilita(jsons):
             ponto_orvalho               =       0
             pontoOrvalho_habilita       =       0
         
+        if 'tempsilo_habilita' in item and item['tempsilo_habilita'] is not None:
+            tempsilo_habilita = item['tempsilo_habilita']
+            
+            
+        else:
+            tempsilo_habilita = dados_receita['dados']['tempSilos_habilita']
 
-   
-        
+        if 'tempsilo_set_point' in item and item['tempsilo_set_point'] is not None:
+            tempsilo_set_point = int(item['tempsilo_set_point'])
 
+        else:
+            
+            tempsilo_set_point = dados_receita['dados']['tempSilos_tipo_set_point']
+
+        if 'tempsilo_limite' in item and item['tempsilo_limite'] is not None:
+            tempsilo_limite = int(item['tempsilo_limite'])
+        else:
+           
+            tempsilo_limite = dados_receita['dados']['tempSilos_limite_temperatura']
 
     db.set_query_receita_web(atualizado_web,
                              intervaloTemp_habilita,
@@ -158,5 +174,8 @@ def atualizar_dias_habilita(jsons):
                              considerar_chuva,
                              umidade_minima,
                              umidade_maxima,
-                             ponto_orvalho)
+                             ponto_orvalho,
+                             tempsilo_habilita,
+                             tempsilo_set_point,
+                             tempsilo_limite)
 

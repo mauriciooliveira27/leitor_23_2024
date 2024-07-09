@@ -11,8 +11,8 @@ class MysqlConnection:
             try:
                 self.__connection = mysql.connector.connect(
 
-                                                                host = "localhost",
-                                                                user = "leitor_termo",
+                                                                host = "192.168.100.141",
+                                                                user = "scada",
                                                                 password = "termometria",
                                                                 db = "Termometria"
                                                             ) 
@@ -87,7 +87,10 @@ class MysqlConnection:
                                 chuva,
                                 um_min,
                                 um_max,
-                                po):
+                                po,
+                                tempsilo_habilita,
+                                tempSilos_tipo_set_point,
+                                tempSilos_limite_temperatura):
                             
         if not self.__connection.is_connected or self.__connection is None:
             self.__connection = self.__conect()
@@ -120,12 +123,14 @@ class MysqlConnection:
                             '$.chuva_habilita',%s,
                             '$.umidade_min_valor',%s,
                             '$.umidade_max_valor',%s,
-                            '$.pontoOrvalho_temp_ponto_orvalho',%s
-                         
+                            '$.pontoOrvalho_temp_ponto_orvalho',%s,
+                            '$.tempSilos_habilita',%s,
+                            '$.tempSilos_tipo_set_point',%s,
+                            '$.tempSilos_limite_temperatura',%s
                         )
                         WHERE codigo order by codigo desc limit 1;
                     """
-            paremetro =  (atualizada_em,intervaloTemp_habilita,intervaloHorario_habilita,chuva_habilita,umidade_habilita,pontoOrvalho_habilita,temp_min,temp_max,hora_ini,min_inicial,min_fin,hora_fin,dom,seg, ter, quar, quin, sex, sab,chuva,um_min,um_max,po)
+            paremetro =  (atualizada_em,intervaloTemp_habilita,intervaloHorario_habilita,chuva_habilita,umidade_habilita,pontoOrvalho_habilita,temp_min,temp_max,hora_ini,min_inicial,min_fin,hora_fin,dom,seg, ter, quar, quin, sex, sab,chuva,um_min,um_max,po,tempsilo_habilita,tempSilos_tipo_set_point,tempSilos_limite_temperatura)
             cursor.execute(query,paremetro)
             self.__connection.commit()
         except mysql.connector.Error as e:
