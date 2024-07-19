@@ -1,9 +1,9 @@
-from .factory_abs import FactoryPlacaAbs
+from .factory_abs import FactoryPlacaAbstract
 from placa import PlacaMaster
 
 
 
-class FactoryPlacaMaster(FactoryPlacaAbs):
+class FactoryPlacaMaster(FactoryPlacaAbstract):
 
     def create_placa(self):
         return PlacaMaster()

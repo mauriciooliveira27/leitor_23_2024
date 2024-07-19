@@ -6,14 +6,15 @@ from manager_placa import ManagerPlacaSlave
 from factory.factory_placa_master import  FactoryPlacaMaster
 from factory.factory_placa_slave import  FactoryPlacaSlave
 
-class ManagerObjectPlaca(ManagerPlacaSlave):
+class ManagerObjectPlaca:
 
     _list_placa = []
+    placa_slave = ManagerPlacaSlave()
     def manager_object(self):    
-        self.cod    =   self._cod_placa
-        self.ip     =   self._ip_placa
+        self.cod    =   self.placa_slave._cod_placa
+        self.ip     =   self.placa_slave._ip_placa
 
-        for indice , cod in  enumerate(self._cod_placa):
+        for indice , cod in  enumerate(self.placa_slave._cod_placa):
 
             _factory_placa = FactoryPlacaSlave()
             ip      =   self.ip[indice]

@@ -25,7 +25,6 @@ def error_connection():
 def error_timeout():
     return "INSERT INTO  log_erros (TIPO_ERRO, MSG_ERRO,ID_ERRO) VALUES ('falha ao enviar dados da termometria.', 'ERROR:500 Houve um erro de tempo limite.',4);"
 #erro decodificação do Json
-
 def error_json_decode():
     return "INSERT INTO log_erros (TIPO_ERRO, MSG_ERRO, ID_ERRO) VALUES ('falha ao enviar dados da termometria.', 'ERROR: Houve um erro na decodificação do Json no corpo na requisição.',5)"
 #erro indefino trata erros de maneira genérica

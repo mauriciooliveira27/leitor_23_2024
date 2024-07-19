@@ -3,7 +3,7 @@ from abc import ABC, abstractmethod
 
 
 
-class FactoryPlacaAbs(ABC):
+class FactoryPlacaAbstract(ABC):
 
     @abstractmethod
     def create_placa(self):
