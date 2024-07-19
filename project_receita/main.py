@@ -82,7 +82,7 @@ class Main:
         while erros < tentativas:
             try:
                 response    =       self.request.Post(dados_enviar)
-                #print(dados_enviar)
+                print(dados_enviar)
                 content     =       tratamento.tratar_resposta(response)
                 #print('enviando')
                 break

@@ -11,9 +11,9 @@ class MysqlConnection:
             try:
                 self.__connection = mysql.connector.connect(
 
-                                                                host = "192.168.100.141",
-                                                                user = "scada",
-                                                                password = "termometria",
+                                                                host = "",
+                                                                user = "",
+                                                                password = "",
                                                                 db = "Termometria"
                                                             ) 
                 if self.__connection.is_connected():
