@@ -132,25 +132,32 @@ def atualizar_dias_habilita(jsons,dados_receita):
             ponto_orvalho               =       0
             pontoOrvalho_habilita       =       0
         
+
         if 'tempsilo_habilita' in item and item['tempsilo_habilita'] is not None:
             tempsilo_habilita = item['tempsilo_habilita']
-            
-            
         else:
             tempsilo_habilita = dados_receita['dados']['tempSilos_habilita']
 
+
         if 'tempsilo_set_point' in item and item['tempsilo_set_point'] is not None:
             tempsilo_set_point = int(item['tempsilo_set_point'])
-
         else:
-            
             tempsilo_set_point = dados_receita['dados']['tempSilos_tipo_set_point']
+
 
         if 'tempsilo_limite' in item and item['tempsilo_limite'] is not None:
             tempsilo_limite = int(item['tempsilo_limite'])
         else:
-           
             tempsilo_limite = dados_receita['dados']['tempSilos_limite_temperatura']
+        
+
+        if 'tempsilo_set_point' in item and item['tempsilo_set_point'] is not None:
+            tempsilo_limite = int(item['tempsilo_set_point'])
+        else:
+            tempsilo_limite = dados_receita['dados']['tempSilos_temp_set_point']
+
+
+
 
     db.set_query_receita_web(atualizado_web,
                              intervaloTemp_habilita,

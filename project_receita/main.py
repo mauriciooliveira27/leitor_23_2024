@@ -29,6 +29,7 @@ class TreatingResponses:
         if 'application/json' in content_type:
             response_json       =       json.loads(response.read().decode('utf-8'))
             response_api        =       response_json
+            print("API::::" , response_api)
             result              =       validar(response_api,dados_enviar,dados_receita)
 
             if result == True:
