@@ -11,19 +11,19 @@ class MysqlConnection:
             try:
                 self.__connection = mysql.connector.connect(
 
-                                                                host = "192.168.100.141",
+                                                                host = "localhost",
                                                                 user = "scada",
                                                                 password = "termometria",
                                                                 db = "Termometria"
                                                             ) 
                 if self.__connection.is_connected():
-                    #print("conected.")
+                    print("conected.")
                     break
             except mysql.connector.Error as e:
-                #print(f"Exception {e}")
+                print(f"Exception {e}")
                 pass
 
-            #print("erro trying in 10 secouds")
+            print("erro trying in 10 secouds")
             time.sleep(10)
     def __conect(self) -> mysql.connector.connection:
         self.__connection()
@@ -88,9 +88,8 @@ class MysqlConnection:
                                 um_min,
                                 um_max,
                                 po,
-                                tempsilo_habilita,
-                                tempSilos_tipo_set_point,
-                                tempSilos_limite_temperatura):
+                                tempSilos_habilita,
+                                tempSilos_tipo_set_point,tempSilos_limite_temperatura,tempSilos_temp_set_point):
                             
         if not self.__connection.is_connected or self.__connection is None:
             self.__connection = self.__conect()
@@ -126,15 +125,31 @@ class MysqlConnection:
                             '$.pontoOrvalho_temp_ponto_orvalho',%s,
                             '$.tempSilos_habilita',%s,
                             '$.tempSilos_tipo_set_point',%s,
-                            '$.tempSilos_limite_temperatura',%s
+                            '$.tempSilos_limite_temperatura',%s,
+                            '$.tempSilos_temp_set_point',%s
+                            
                         )
                         WHERE codigo order by codigo desc limit 1;
                     """
-            paremetro =  (atualizada_em,intervaloTemp_habilita,intervaloHorario_habilita,chuva_habilita,umidade_habilita,pontoOrvalho_habilita,temp_min,temp_max,hora_ini,min_inicial,min_fin,hora_fin,dom,seg, ter, quar, quin, sex, sab,chuva,um_min,um_max,po,tempsilo_habilita,tempSilos_tipo_set_point,tempSilos_limite_temperatura)
+            paremetro =  (atualizada_em,intervaloTemp_habilita,intervaloHorario_habilita,chuva_habilita,umidade_habilita,pontoOrvalho_habilita,temp_min,temp_max,hora_ini,min_inicial,min_fin,hora_fin,dom,seg, ter, quar, quin, sex, sab,chuva,um_min,um_max,po,tempSilos_habilita,tempSilos_tipo_set_point,tempSilos_limite_temperatura,tempSilos_temp_set_point)
             cursor.execute(query,paremetro)
             self.__connection.commit()
+            print("Query executada com sucesso")
+            
+            # Para depuração, se desejar verificar a quantidade de linhas afetadas
+            print(f"Linhas afetadas: {cursor.rowcount}")
+
         except mysql.connector.Error as e:
-            #print(e)
-            raise QueryError(f"Erro in querying{e}")
+            # Exibir o erro SQL
+            print(f"Erro na execução da query: {e}")
+            raise QueryError(f"Erro na execução da query: {e}")
+
+        except Exception as e:
+            # Exibir outros erros genéricos
+            print(f"Erro inesperado: {e}")
+            raise QueryError(f"Erro inesperado: {e}")
+
         finally:
             cursor.close()
+
+

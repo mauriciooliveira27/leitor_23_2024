@@ -135,29 +135,32 @@ def atualizar_dias_habilita(jsons,dados_receita):
 
         if 'tempsilo_habilita' in item and item['tempsilo_habilita'] is not None:
             tempsilo_habilita = item['tempsilo_habilita']
+            print('tempsilo_habilita', tempsilo_habilita)
         else:
             tempsilo_habilita = dados_receita['dados']['tempSilos_habilita']
+       
+        if 'tempsilo_tipo_set_point' in item:
+            tempsilo_tipo_set_point = 0 if  item['tempsilo_tipo_set_point'] == None else item['tempsilo_tipo_set_point']
+            print('tempsilo_tipo_set_point', tempsilo_tipo_set_point)
+            
+        else:
+            tempsilo_tipo_set_point = dados_receita['dados']['tempSilos_tipo_set_point']
 
+
+        if 'tempsilo_limite' in item:
+            tempsilo_limite = 0 if item['tempsilo_limite'] == None else item['tempsilo_limite']
+            
+        else:
+            tempsilo_limite = 0
 
         if 'tempsilo_set_point' in item and item['tempsilo_set_point'] is not None:
-            tempsilo_set_point = int(item['tempsilo_set_point'])
+           
+           tempSilos_temp_set_point = float(item['tempsilo_set_point'])
+           tempSilos_temp_set_point_decimal = f'{tempSilos_temp_set_point:.1f}'
+           tempSilos_temp_set_point_str = str(tempSilos_temp_set_point_decimal)
+
         else:
-            tempsilo_set_point = dados_receita['dados']['tempSilos_tipo_set_point']
-
-
-        if 'tempsilo_limite' in item and item['tempsilo_limite'] is not None:
-            tempsilo_limite = int(item['tempsilo_limite'])
-        else:
-            tempsilo_limite = dados_receita['dados']['tempSilos_limite_temperatura']
-        
-
-        if 'tempsilo_set_point' in item and item['tempsilo_set_point'] is not None:
-            tempsilo_limite = int(item['tempsilo_set_point'])
-        else:
-            tempsilo_limite = dados_receita['dados']['tempSilos_temp_set_point']
-
-
-
+            tempSilos_temp_set_point = 0
 
     db.set_query_receita_web(atualizado_web,
                              intervaloTemp_habilita,
@@ -183,6 +186,8 @@ def atualizar_dias_habilita(jsons,dados_receita):
                              umidade_maxima,
                              ponto_orvalho,
                              tempsilo_habilita,
-                             tempsilo_set_point,
-                             tempsilo_limite)
+                             tempsilo_tipo_set_point,
+                             tempsilo_limite,
+                             tempSilos_temp_set_point_str
+                            )
 
